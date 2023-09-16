@@ -3,5 +3,44 @@
   
   
   
+  <entry>
+    <title>robotstxt</title>
+    <link href="/2023/09/15/robotstxt/"/>
+    <url>/2023/09/15/robotstxt/</url>
+    
+    <content type="html"><![CDATA[<h2 id="robots-txt"><a href="#robots-txt" class="headerlink" title="robots.txt"></a>robots.txt</h2><p>robots.txt 文件是一个文本文件，使用任何一个常见的文 本编辑器，比如 Windows 系统自带的 Notepad，就可以创建和编辑它。robots.txt 是一个协议，而不是一个命令。 robots.txt 是搜索引擎中访问网站的时候要查看的第一个 文件。robots.txt 文件告诉蜘蛛程序在服务器上什么文件 是可以被查看的。</p><h2 id="用途"><a href="#用途" class="headerlink" title="用途"></a>用途</h2><p>robots.txt 常用于过滤掉不希望搜索引擎能搜索出来的文件，这种文件常常是敏感的，本体中，如下：<br><img src="/2023/09/15/robotstxt/image1.jpg"><br>在获取到&#x2F;fl0g.php的信息后，放在url里 get 请求即可获取到 flag。</p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>about</title>
+    <link href="/2023/09/15/about/"/>
+    <url>/2023/09/15/about/</url>
+    
+    <content type="html"><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>欢迎来到 214 的博客，这里会记录所有在计算机学习过程中遇到的问题与解决方案，复杂问题也有，简单问题也有！</p><h3 id="关于我"><a href="#关于我" class="headerlink" title="关于我"></a>关于我</h3><p>我是一名 985 大学本科生，目前就读于软件工程专业，致力于写博客来记录所思所想。</p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="/2023/09/12/hello-world/"/>
+    <url>/2023/09/12/hello-world/</url>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span><br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo server<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo generate<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo deploy<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
   
 </search>
