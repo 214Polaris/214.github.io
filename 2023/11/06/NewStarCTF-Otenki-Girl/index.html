@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://214polaris.github.io/img/comic_0033.png">
 <meta property="article:published_time" content="2023-11-06T04:31:50.000Z">
-<meta property="article:modified_time" content="2023-11-06T04:32:30.665Z">
+<meta property="article:modified_time" content="2023-11-06T04:36:27.642Z">
 <meta property="article:author" content="214">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://214polaris.github.io/img/comic_0033.png">
@@ -284,7 +284,9 @@
 
 <p>上述代码构造了一个对象 cat, 首先会生成该 cat 的原型,即 <code>cat.prototype</code>.  生成 <code>prototype</code> 后,会生成一个隐式的构造函数 <code>cat()</code>, 这里构造函数 <code>cat()</code> 的原型 (protoype)就是 <code>cat.prototype</code>, 而对于构造函数构造出来的对象,也会有一个属性指向他的原型,即 <code>cat[&#39;__proto__&#39;]</code>.</p>
 <p>同时由于 <code>cat</code> 对象是继承于 <code>Object</code> 对象,所以 <code>cat</code> 对象的原型 <code>cat.prototype</code> 也有原型,他的原型就是 <code>Object</code> 的原型 <code>Object.prototype</code>.</p>
-<p>即 <code>cat.prototype[&#39;__proto__&#39;]</code> &#x3D;  <code>Object</code>.prototype</p>
+<p>即 </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">cat.<span class="hljs-property"><span class="hljs-keyword">prototype</span></span>[<span class="hljs-string">&#x27;__proto__&#x27;</span>] =  <span class="hljs-title class_">Object</span>.<span class="hljs-property"><span class="hljs-keyword">prototype</span></span><br></code></pre></td></tr></table></figure>
+
 <p>由于 <code>Object</code> 没有父类,所以 <code>Object</code> 的原型就是 null.</p>
 <p>所以在 <code>cat</code> 这个对象就有一条原型链:</p>
 <figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs livescript">cat<span class="hljs-function"><span class="hljs-params">(实例对象)</span> -&gt;</span> cat.prototype<span class="hljs-function"><span class="hljs-params">(实例原型)</span> -&gt;</span> <span class="hljs-built_in">Object</span>[<span class="hljs-string">&#x27;__proto__&#x27;</span>] -&gt; <span class="hljs-literal">null</span><br></code></pre></td></tr></table></figure>
