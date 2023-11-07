@@ -16,19 +16,17 @@
   <meta name="author" content="214">
   <meta name="keywords" content="">
   
-    <meta name="description" content="【NewStarCTF】Inject Me 目录穿越+ssti+flask_jwt进到靶机后, 稍微探索一下,发现有个这个图片泄露了源码:  这里是一个目录穿越漏洞,其中 1filename &#x3D; filename.replace(&amp;#x27;..&#x2F;&amp;#x27;, &amp;#x27;&amp;#x27;)  这一行代码是可以双写 ..&#x2F; 成　....&#x2F;&#x2F; 进行绕过的.然后由于这是一个 flask 框架,我们尝试去">
+    <meta name="description" content="【NewStarCTF2023】Inject Me 目录穿越+ssti+flask_jwt进到靶机后, 稍微探索一下,发现有个这个图片泄露了源码:  这里是一个目录穿越漏洞,其中 1filename &#x3D; filename.replace(&amp;#x27;..&#x2F;&amp;#x27;, &amp;#x27;&amp;#x27;)  这一行代码是可以双写 ..&#x2F; 成　....&#x2F;&#x2F; 进行绕过的.然后由于这是一个 flask 框架,我">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【NewStarCTF】Inject Me 目录穿越+ssti+flask_jwt">
+<meta property="og:title" content="【NewStarCTF2023】Inject Me 目录穿越+ssti+flask_jwt">
 <meta property="og:url" content="https://214polaris.github.io/2023/11/07/NewStarCTF-Inject-Me/index.html">
 <meta property="og:site_name" content="214&#39;s blog">
-<meta property="og:description" content="【NewStarCTF】Inject Me 目录穿越+ssti+flask_jwt进到靶机后, 稍微探索一下,发现有个这个图片泄露了源码:  这里是一个目录穿越漏洞,其中 1filename &#x3D; filename.replace(&amp;#x27;..&#x2F;&amp;#x27;, &amp;#x27;&amp;#x27;)  这一行代码是可以双写 ..&#x2F; 成　....&#x2F;&#x2F; 进行绕过的.然后由于这是一个 flask 框架,我们尝试去">
+<meta property="og:description" content="【NewStarCTF2023】Inject Me 目录穿越+ssti+flask_jwt进到靶机后, 稍微探索一下,发现有个这个图片泄露了源码:  这里是一个目录穿越漏洞,其中 1filename &#x3D; filename.replace(&amp;#x27;..&#x2F;&amp;#x27;, &amp;#x27;&amp;#x27;)  这一行代码是可以双写 ..&#x2F; 成　....&#x2F;&#x2F; 进行绕过的.然后由于这是一个 flask 框架,我">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://214polaris.github.io/img/comic_0034.png">
 <meta property="article:published_time" content="2023-11-07T07:18:19.000Z">
-<meta property="article:modified_time" content="2023-11-07T07:45:26.476Z">
+<meta property="article:modified_time" content="2023-11-07T07:47:50.737Z">
 <meta property="article:author" content="214">
-<meta property="article:tag" content="CTF">
-<meta property="article:tag" content="Web">
 <meta property="article:tag" content="ssti">
 <meta property="article:tag" content="flask">
 <meta property="article:tag" content="jwt">
@@ -37,7 +35,7 @@
   
   
   
-  <title>【NewStarCTF】Inject Me 目录穿越+ssti+flask_jwt - 214&#39;s blog</title>
+  <title>【NewStarCTF2023】Inject Me 目录穿越+ssti+flask_jwt - 214&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -203,7 +201,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="【NewStarCTF】Inject Me 目录穿越+ssti+flask_jwt"></span>
+            <span id="subtitle" data-typed-text="【NewStarCTF2023】Inject Me 目录穿越+ssti+flask_jwt"></span>
           
         </div>
 
@@ -274,12 +272,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">【NewStarCTF】Inject Me 目录穿越+ssti+flask_jwt</h1>
+            <h1 id="seo-header">【NewStarCTF2023】Inject Me 目录穿越+ssti+flask_jwt</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="【NewStarCTF】Inject-Me-目录穿越-ssti-flask-jwt"><a href="#【NewStarCTF】Inject-Me-目录穿越-ssti-flask-jwt" class="headerlink" title="【NewStarCTF】Inject Me 目录穿越+ssti+flask_jwt"></a>【NewStarCTF】Inject Me 目录穿越+ssti+flask_jwt</h1><p>进到靶机后, 稍微探索一下,发现有个这个图片泄露了源码:</p>
+                <h1 id="【NewStarCTF2023】Inject-Me-目录穿越-ssti-flask-jwt"><a href="#【NewStarCTF2023】Inject-Me-目录穿越-ssti-flask-jwt" class="headerlink" title="【NewStarCTF2023】Inject Me 目录穿越+ssti+flask_jwt"></a>【NewStarCTF2023】Inject Me 目录穿越+ssti+flask_jwt</h1><p>进到靶机后, 稍微探索一下,发现有个这个图片泄露了源码:</p>
 <p><img src="/2023/11/07/NewStarCTF-Inject-Me/image.png" srcset="/img/loading.gif" lazyload></p>
 <p>这里是一个目录穿越漏洞,其中</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">filename = filename.replace(<span class="hljs-string">&#x27;../&#x27;</span>, <span class="hljs-string">&#x27;&#x27;</span>)<br></code></pre></td></tr></table></figure>
@@ -348,10 +346,6 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/CTF/" class="print-no-link">#CTF</a>
-      
-        <a href="/tags/Web/" class="print-no-link">#Web</a>
-      
         <a href="/tags/ssti/" class="print-no-link">#ssti</a>
       
         <a href="/tags/flask/" class="print-no-link">#flask</a>
@@ -368,7 +362,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>【NewStarCTF】Inject Me 目录穿越+ssti+flask_jwt</div>
+      <div>【NewStarCTF2023】Inject Me 目录穿越+ssti+flask_jwt</div>
       <div>https://214polaris.github.io/2023/11/07/NewStarCTF-Inject-Me/</div>
     </div>
     <div class="license-meta">
