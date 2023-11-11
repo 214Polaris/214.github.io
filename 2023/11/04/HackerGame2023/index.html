@@ -1,22 +1,4 @@
-
-
-<!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=auto>
-
-
-
-<head>
-  <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.jpg">
-  <link rel="icon" href="/img/avatar.jpg">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  
-  <meta name="theme-color" content="#F292B3">
-  <meta name="author" content="214">
-  <meta name="keywords" content="">
-  
-    <meta name="description" content="HackerGame 2023 WriteUp感想今年 hackergame 圆满结束，很享受的一次旅程（同时也有点折磨 QAQ），hackergame 这一个星期 ddl 挺多的，所以本次名次并不高，校内 15 名，总排名 226，这篇博客记录的不仅仅是自己做出来的题目的 WP，同时也对官方题解和我感兴趣的题目做一个 log，学习多点知识。 WP 部分HackerGame 启动签到题，打开题目后">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>【HackerGame2023】 WriteUp | 214's blog</title><meta name="author" content="214"><meta name="copyright" content="214"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="HackerGame 2023 WriteUp感想今年 hackergame 圆满结束，很享受的一次旅程（同时也有点折磨 QAQ），hackergame 这一个星期 ddl 挺多的，所以本次名次并不高，校内 15 名，总排名 226，这篇博客记录的不仅仅是自己做出来的题目的 WP，同时也对官方题解和我感兴趣的题目做一个 log，学习多点知识。 WP 部分HackerGame 启动签到题，打开题目后">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【HackerGame2023】 WriteUp">
 <meta property="og:url" content="https://214polaris.github.io/2023/11/04/HackerGame2023/index.html">
@@ -25,7 +7,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://214polaris.github.io/img/comic_0031.png">
 <meta property="article:published_time" content="2023-11-04T09:41:37.000Z">
-<meta property="article:modified_time" content="2023-11-07T07:50:27.361Z">
+<meta property="article:modified_time" content="2023-11-10T15:40:07.811Z">
 <meta property="article:author" content="214">
 <meta property="article:tag" content="社工">
 <meta property="article:tag" content="爆破">
@@ -36,256 +18,156 @@
 <meta property="article:tag" content="asciinema">
 <meta property="article:tag" content="json">
 <meta property="article:tag" content="yaml">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://214polaris.github.io/img/comic_0031.png">
-  
-  
-  
-  <title>【HackerGame2023】 WriteUp - 214&#39;s blog</title>
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
-
-
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
-
-
-
-<!-- 主题依赖的图标库，不要自行修改 -->
-<!-- Do not modify the link that theme dependent icons -->
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
-
-
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
-
-
-<link  rel="stylesheet" href="/css/main.css" />
-
-
-  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
-  
-    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
-  
-
-
-
-
-  <script id="fluid-configs">
-    var Fluid = window.Fluid || {};
-    Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"214polaris.github.io","root":"/","version":"1.9.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
-
-    if (CONFIG.web_analytics.follow_dnt) {
-      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
-      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
-    }
-  </script>
-  <script  src="/js/utils.js" ></script>
-  <script  src="/js/color-schema.js" ></script>
-  
-
-
-  
-<meta name="generator" content="Hexo 6.3.0"></head>
-
-
-<body>
-  
-
-  <header>
-    
-
-<div class="header-inner" style="height: 70vh;">
-  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
-  <div class="container">
-    <a class="navbar-brand" href="/">
-      <strong>214&#39;s Blog</strong>
-    </a>
-
-    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <div class="animated-icon"><span></span><span></span><span></span></div>
-    </button>
-
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto text-center">
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/">
-                <i class="iconfont icon-home-fill"></i>
-                <span>首页</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/">
-                <i class="iconfont icon-archive-fill"></i>
-                <span>归档</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/categories/">
-                <i class="iconfont icon-category-fill"></i>
-                <span>分类</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/tags/">
-                <i class="iconfont icon-tags-fill"></i>
-                <span>标签</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/about/">
-                <i class="iconfont icon-user-fill"></i>
-                <span>关于</span>
-              </a>
-            </li>
-          
-        
-        
-          <li class="nav-item" id="search-btn">
-            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
-              <i class="iconfont icon-search"></i>
-            </a>
-          </li>
-          
-        
-        
-          <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
-              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
-            </a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-</nav>
-
-  
-
-<div id="banner" class="banner" parallax=true
-     style="background: url('/img/mzk.png') no-repeat center center; background-size: cover;">
-  <div class="full-bg-img">
-    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-      <div class="banner-text text-center fade-in-up">
-        <div class="h2">
-          
-            <span id="subtitle" data-typed-text="【HackerGame2023】 WriteUp"></span>
-          
-        </div>
-
-        
-          
-  <div class="mt-3">
-    
-    
-      <span class="post-meta">
-        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-11-04 17:41" pubdate>
-          2023年11月4日 下午
-        </time>
-      </span>
-    
-  </div>
-
-  <div class="mt-1">
-    
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-chart"></i>
-        
-          12k 字
-        
-      </span>
-    
-
-    
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-clock-fill"></i>
-        
-        
-        
-          99 分钟
-        
-      </span>
-    
-
-    
-    
-  </div>
-
-
-        
-      </div>
-
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://214polaris.github.io/img/comic_0031.png"><link rel="shortcut icon" href="/img/avatar.jpg"><link rel="canonical" href="https://214polaris.github.io/2023/11/04/HackerGame2023/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-T0N45C83TX"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-T0N45C83TX');
+</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '【HackerGame2023】 WriteUp',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-11-10 23:40:07'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
       
-    </div>
-  </div>
-</div>
-
-</div>
-
-  </header>
-
-  <main>
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
     
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
       
-
-<div class="container-fluid nopadding-x">
-  <div class="row nomargin-x">
-    <div class="side-col d-none d-lg-block col-lg-2">
-      
-
-    </div>
-
-    <div class="col-lg-8 nopadding-x-md">
-      <div class="container nopadding-x-md" id="board-ctn">
-        <div id="board">
-          <article class="post-content mx-auto">
-            <h1 id="seo-header">【HackerGame2023】 WriteUp</h1>
-            
-            
-              <div class="markdown-body">
-                
-                <h1 id="HackerGame-2023-WriteUp"><a href="#HackerGame-2023-WriteUp" class="headerlink" title="HackerGame 2023 WriteUp"></a>HackerGame 2023 WriteUp</h1><h2 id="感想"><a href="#感想" class="headerlink" title="感想"></a>感想</h2><p>今年 hackergame 圆满结束，很享受的一次旅程（同时也有点折磨 QAQ），hackergame 这一个星期 ddl 挺多的，所以本次名次并不高，校内 15 名，总排名 226，这篇博客记录的不仅仅是自己做出来的题目的 WP，同时也对官方题解和我感兴趣的题目做一个 log，学习多点知识。</p>
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">20</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">38</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">11</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 時間軸</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 標籤</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分類</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 關於</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/comic_0031.png')"><nav id="nav"><span id="blog-info"><a href="/" title="214's blog"><img class="site-icon" src="/img/avatar.jpg"/><span class="site-name">214's blog</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 時間軸</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 標籤</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分類</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 關於</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">【HackerGame2023】 WriteUp</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-11-04T09:41:37.000Z" title="发表于 2023-11-04 17:41:37">2023-11-04</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-11-10T15:40:07.811Z" title="更新于 2023-11-10 23:40:07">2023-11-10</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/HackerGame/">HackerGame</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/HackerGame/2023/">2023</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="【HackerGame2023】 WriteUp"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="HackerGame-2023-WriteUp"><a href="#HackerGame-2023-WriteUp" class="headerlink" title="HackerGame 2023 WriteUp"></a>HackerGame 2023 WriteUp</h1><h2 id="感想"><a href="#感想" class="headerlink" title="感想"></a>感想</h2><p>今年 hackergame 圆满结束，很享受的一次旅程（同时也有点折磨 QAQ），hackergame 这一个星期 ddl 挺多的，所以本次名次并不高，校内 15 名，总排名 226，这篇博客记录的不仅仅是自己做出来的题目的 WP，同时也对官方题解和我感兴趣的题目做一个 log，学习多点知识。</p>
 <h2 id="WP-部分"><a href="#WP-部分" class="headerlink" title="WP 部分"></a>WP 部分</h2><h3 id="HackerGame-启动"><a href="#HackerGame-启动" class="headerlink" title="HackerGame 启动"></a>HackerGame 启动</h3><p>签到题，打开题目后让你大声喊出 hackergame 启动！要求准确率到达百分之 99.99%，这是不可能的，上传的时候发现他是在 url 传参的，改一下参数(simularity&#x3D;99.999)就过了。</p>
-<p><img src="/2023/11/04/HackerGame2023/1.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2023/11/04/HackerGame2023/1.png"></p>
 <h3 id="猫咪小测"><a href="#猫咪小测" class="headerlink" title="猫咪小测"></a>猫咪小测</h3><p>今年猫咪小测一共有四道题：</p>
 <p><code>1. 想要借阅世界图书出版公司出版的《A Classical Introduction To Modern Number Theory 2nd ed.》，应当前往中国科学技术大学西区图书馆的哪一层？（是一个非负整数） </code></p>
 <p>答：这道题给了提示是一个非负整数，而且图书馆不会很高，直接 0-20 爆破就行了。</p>
@@ -295,46 +177,46 @@
 <p>问 chatgpt，答案为 CONFIG_TCP_CONG_BBR。</p>
 <p><code>4. 🥒🥒🥒：「我……从没觉得写类型标注有意思过」。在一篇论文中，作者给出了能够让 Python 的类型检查器 MyPY mypy 陷入死循环的代码，并证明 Python 的类型检查和停机问题一样困难。请问这篇论文发表在今年的哪个学术会议上？（会议的大写英文简称，比如 ISCA、CCS、ICML。）</code></p>
 <p>我的做法是直接爆破所有的和 python 有关的学术会议，最后爆破出来是 ECOOP。官方题解则是以”python type check mypy halting problem”为关键词搜索对应的学术论文。</p>
-<h3 id="更深更暗"><a href="#更深更暗" class="headerlink" title="更深更暗"></a>更深更暗</h3><p>进去后，提示我们要翻到最底下。<br><img src="/2023/11/04/HackerGame2023/2.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="更深更暗"><a href="#更深更暗" class="headerlink" title="更深更暗"></a>更深更暗</h3><p>进去后，提示我们要翻到最底下。<br><img src="/2023/11/04/HackerGame2023/2.png"></p>
 <p>我们直接 bp 抓包，看源代码，发现 flag 是 token 的哈希加密值，直接在本地复现即可：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> <span class="hljs-title class_">CryptoJS</span> = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;crypto-js&#x27;</span>);<br><span class="hljs-keyword">let</span> token =<br>  <span class="hljs-string">&#x27;340:MEQCID15NFRrTG68kB61LStGU/dVdE7xfkJYGlzMvO+UEfRyAiBZn5rm5XJZ4RBT54m7Qdu/fLoKzne1MGfiXFaPbNKuhQ==&#x27;</span>;<br><span class="hljs-keyword">let</span> hash = <span class="hljs-title class_">CryptoJS</span>.<span class="hljs-title class_">SHA256</span>(<span class="hljs-string">`dEEper_@nd_d@rKer_<span class="hljs-subst">$&#123;token&#125;</span>`</span>).<span class="hljs-title function_">toString</span>(<br>  <span class="hljs-title class_">CryptoJS</span>.<span class="hljs-property">enc</span>.<span class="hljs-property">Hex</span><br>);<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`flag&#123;T1t@n_<span class="hljs-subst">$&#123;hash.slice(<span class="hljs-number">0</span>, <span class="hljs-number">32</span>)&#125;</span>&#125;`</span>);<br></code></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">CryptoJS</span> = <span class="built_in">require</span>(<span class="string">&#x27;crypto-js&#x27;</span>);</span><br><span class="line"><span class="keyword">let</span> token =</span><br><span class="line">  <span class="string">&#x27;340:MEQCID15NFRrTG68kB61LStGU/dVdE7xfkJYGlzMvO+UEfRyAiBZn5rm5XJZ4RBT54m7Qdu/fLoKzne1MGfiXFaPbNKuhQ==&#x27;</span>;</span><br><span class="line"><span class="keyword">let</span> hash = <span class="title class_">CryptoJS</span>.<span class="title class_">SHA256</span>(<span class="string">`dEEper_@nd_d@rKer_<span class="subst">$&#123;token&#125;</span>`</span>).<span class="title function_">toString</span>(</span><br><span class="line">  <span class="title class_">CryptoJS</span>.<span class="property">enc</span>.<span class="property">Hex</span></span><br><span class="line">);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`flag&#123;T1t@n_<span class="subst">$&#123;hash.slice(<span class="number">0</span>, <span class="number">32</span>)&#125;</span>&#125;`</span>);</span><br></pre></td></tr></table></figure>
 
 <h3 id="旅行照片-3-0"><a href="#旅行照片-3-0" class="headerlink" title="旅行照片 3.0"></a>旅行照片 3.0</h3><p>一年一度的社工题，这里分享我的做法。</p>
 <p><code>题目1-2： 1、你还记得与学长见面这天是哪一天吗？（格式：yyyy-mm-dd） 2、在学校该展厅展示的所有同种金色奖牌的得主中，出生最晚者获奖时所在的研s究所缩写是什么？</code></p>
 <p>首先确认时间是在暑假发生，然后仔细观察图片，发现有：</p>
-<p><img src="/2023/11/04/HackerGame2023/3.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2023/11/04/HackerGame2023/3.png"></p>
 <p>谷歌一搜发现是学术会议 statphys28，一搜发现时间在 8 月 7 日-8 月 11 日举行，举行地点是东京，其实就已经确认了学长是在东京大学读书，时间一个很小的范围，把第二道题确认下来爆破。</p>
 <p>第二道题给了一个奖牌，上面有个人名：<strong>M.KOSHIBA</strong></p>
 <p>搜索后发现是诺贝尔物理学奖获得者，这里就需要寻找东京大学诺贝尔物理学奖获得者最年轻的那位：</p>
-<p><img src="/2023/11/04/HackerGame2023/4.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2023/11/04/HackerGame2023/4.png"></p>
 <p>发现是梶田隆章，研究所的缩写为 ICRR，然后根据这个一起去爆破第一问的时间，确认答案为：</p>
 <p><strong>2023-8-10</strong>和<strong>ICRR</strong></p>
 <p><code>题目3-4 3、帐篷中活动招募志愿者时用于收集报名信息的在线问卷的编号（以字母 S 开头后接数字）是多少？ 4、学长购买自己的博物馆门票时，花费了多少日元？</code></p>
 <p>对于第 3 题，谷歌对帐篷图片识图，发现是上野公园，谷歌搜索上野公园 2023 年 8 月 10 日的活动，看到有个梅酒节活动，里面有 staff 大募集，能拿到问卷编号。</p>
-<p><img src="/2023/11/04/HackerGame2023/5.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2023/11/04/HackerGame2023/5.png"></p>
 <p>对于第 4 题，上野公园的博物馆基本可以确定是东京国立博物馆，直接去搜他的官网，发现他是对大学生免费的，所以答案就是<strong>0</strong></p>
 <p><code>题目5-6 5、学长当天晚上需要在哪栋标志性建筑物的附近集合呢？(请用简体中文回答，四个汉字) 6、进站时，你在 JR 上野站中央检票口外看到「ボタン＆カフリンクス」活动正在销售动物周边商品，该活动张贴的粉色背景海报上是什么动物（记作 A，两个汉字）？ 在出站处附近建筑的屋顶广告牌上，每小时都会顽皮出现的那只 3D 动物是什么品种？（记作 B，三个汉字）？（格式：A-B）</code></p>
 <p>对于第 5 题，我当时猜测集合地点可能是坐船的地点，然后把浅草那边所有的码头的枚举了都不对，然后仔细看看，发现“学长即将开始他的学术之旅”，就又回去看了看 statphys28，发现他是在晚上举行的，statphys28 的官网有谷歌地图定位：</p>
-<p><img src="/2023/11/04/HackerGame2023/6.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2023/11/04/HackerGame2023/6.png"></p>
 <p>进去后发现是在<strong>安田讲堂</strong>：</p>
-<p><img src="/2023/11/04/HackerGame2023/7.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2023/11/04/HackerGame2023/7.png"></p>
 <p>对于第 6 题，直接在推特搜”ボタン＆カフリンクス”</p>
-<p><img src="/2023/11/04/HackerGame2023/8.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2023/11/04/HackerGame2023/8.png"></p>
 <p>可以确定是个熊猫，第二小问就比较离谱了，我当时没注意看是<strong>出站附近</strong>，以为是上野站附近的广告牌有 3d 小动物，看了很久的街景都没发现有（心想这地方那么村，怎么会有超大的 3d 广告牌），后来没头绪了仔细看了一下，发现是出站，他的第三张图片是去了任天堂马里奥世界，在涩谷，那就很简单了，在涩谷站出站每小时都会顽皮出现的那只 3D 动物就是<strong>秋田犬</strong></p>
 <h3 id="赛博井字棋"><a href="#赛博井字棋" class="headerlink" title="赛博井字棋"></a>赛博井字棋</h3><p>这道简单题卡了我挺久 QAQ，进去后抓包看他 script.js 的内容：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">setMove</span>(<span class="hljs-params">x, y</span>) &#123;<br>  <span class="hljs-keyword">if</span> (board[x][y] != <span class="hljs-number">0</span>) &#123;<br>    <span class="hljs-keyword">return</span>;<br>  &#125;<br>  <span class="hljs-keyword">if</span> (frozen) &#123;<br>    <span class="hljs-keyword">return</span>;<br>  &#125;<br>  <span class="hljs-keyword">let</span> url = <span class="hljs-variable language_">window</span>.<span class="hljs-property">location</span>.<span class="hljs-property">href</span>;<br>  <span class="hljs-keyword">let</span> data = &#123; <span class="hljs-attr">x</span>: x, <span class="hljs-attr">y</span>: y &#125;;<br>  <span class="hljs-keyword">return</span> <span class="hljs-title function_">fetch</span>(url, &#123;<br>    <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;POST&#x27;</span>,<br>    <span class="hljs-attr">headers</span>: &#123;<br>      <span class="hljs-string">&#x27;Content-Type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,<br>    &#125;,<br>    <span class="hljs-attr">body</span>: <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(data),<br>  &#125;).<span class="hljs-title function_">catch</span>(errorHandler);<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">setMove</span>(<span class="params">x, y</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (board[x][y] != <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (frozen) &#123;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">let</span> url = <span class="variable language_">window</span>.<span class="property">location</span>.<span class="property">href</span>;</span><br><span class="line">  <span class="keyword">let</span> data = &#123; <span class="attr">x</span>: x, <span class="attr">y</span>: y &#125;;</span><br><span class="line">  <span class="keyword">return</span> <span class="title function_">fetch</span>(url, &#123;</span><br><span class="line">    <span class="attr">method</span>: <span class="string">&#x27;POST&#x27;</span>,</span><br><span class="line">    <span class="attr">headers</span>: &#123;</span><br><span class="line">      <span class="string">&#x27;Content-Type&#x27;</span>: <span class="string">&#x27;application/json&#x27;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">body</span>: <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(data),</span><br><span class="line">  &#125;).<span class="title function_">catch</span>(errorHandler);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>仔细思考发现，他这个下棋的判断逻辑是在前端就已经写好了，即<strong>他是通过前端组件对棋盘进行判断的</strong>，这样的话我们直接重放 api 传合法的参数，就能把 ai 下的棋子篡改成我们的棋子，获得 flag：</p>
-<p><img src="/2023/11/04/HackerGame2023/9.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2023/11/04/HackerGame2023/9.png"></p>
 <h3 id="奶奶的睡前-flag-故事"><a href="#奶奶的睡前-flag-故事" class="headerlink" title="奶奶的睡前 flag 故事"></a>奶奶的睡前 flag 故事</h3><p>这道题我居然没做出来，真的就是没看提示（谷歌亲儿子），我以为是 png 隐写，结果是 pixel 的漏洞，谷歌 pixel 自带的截图编辑工具截出来的图，我们是可以把它已经裁剪过的截图给复原的，用网站：<br><a target="_blank" rel="noopener" href="https://acropalypse.app/">https://acropalypse.app</a></p>
-<p><img src="/2023/11/04/HackerGame2023/10.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2023/11/04/HackerGame2023/10.png"></p>
 <h3 id="组委会模拟器"><a href="#组委会模拟器" class="headerlink" title="组委会模拟器"></a>组委会模拟器</h3><p>Web 编程题，这里需要注意的是，在发送报文的时候，不要等待获取了响应之后再发新的报文，发送了一个报文后马上要<strong>开一个新的线程</strong>去发下一个报文。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> requests<br><span class="hljs-keyword">import</span> time<br><span class="hljs-keyword">import</span> json<br><span class="hljs-keyword">import</span> re<br><span class="hljs-keyword">import</span> threading<br><br><span class="hljs-comment"># 设置 session</span><br>session = requests.Session()<br>session.cookies.<span class="hljs-built_in">set</span>(<span class="hljs-string">&quot;session&quot;</span>, <span class="hljs-string">&quot;eyJ0b2tlbiI6IjM0MDpNRVFDSUQxNU5GUnJURzY4a0I2MUxTdEdVL2RWZEU3eGZrSllHbHpNdk8rVUVmUnlBaUJabjVybTVYSlo0UkJUNTRtN1FkdS9mTG9Lem5lMU1HZmlYRmFQYk5LdWhRPT0ifQ.ZT4eFw.eaokXgOWqIaaKVpIijCDrvuxRLo&quot;</span>, domain=<span class="hljs-string">&quot;202.38.93.111&quot;</span>)<br><br><span class="hljs-comment"># 获取消息</span><br>response = session.post(<span class="hljs-string">&quot;http://202.38.93.111:10021/api/getMessages&quot;</span>)<br>data = response.json()<br><br><span class="hljs-comment"># 提取所有 hack[...] 格式的消息及其 delay</span><br>messages = []<br><span class="hljs-keyword">for</span> i, message <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(data[<span class="hljs-string">&quot;messages&quot;</span>]):<br>    text = message[<span class="hljs-string">&quot;text&quot;</span>]<br>    delay = message[<span class="hljs-string">&quot;delay&quot;</span>]<br>    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">match</span> := re.search(<span class="hljs-string">r&#x27;hack\[\w+\]&#x27;</span>, text)):<br>        messages.append((i, delay, <span class="hljs-keyword">match</span>.group()))<br><br><span class="hljs-comment"># 对消息按 delay 排序</span><br>messages.sort(key=<span class="hljs-keyword">lambda</span> x: x[<span class="hljs-number">1</span>])<br><br><span class="hljs-comment"># 删除消息的函数</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">delete_message</span>(<span class="hljs-params">message</span>):<br>    response = session.post(<span class="hljs-string">&quot;http://202.38.93.111:10021/api/deleteMessage&quot;</span>, json=&#123;<span class="hljs-string">&quot;id&quot;</span>: message[<span class="hljs-number">0</span>]&#125;)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Deleted message:&quot;</span>, message[<span class="hljs-number">2</span>], <span class="hljs-string">&quot;| Response:&quot;</span>, response.text)<br><br><span class="hljs-comment"># 发送删除请求</span><br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(messages)):<br>    <span class="hljs-keyword">if</span> i &gt; <span class="hljs-number">0</span>:<br>        <span class="hljs-comment"># 等待 delay[i] - delay[i-1] 时间</span><br>        time.sleep(<span class="hljs-built_in">max</span>(<span class="hljs-number">0</span>,messages[i][<span class="hljs-number">1</span>] - messages[i-<span class="hljs-number">1</span>][<span class="hljs-number">1</span>]))<br>    <span class="hljs-comment"># 开启新线程来发送删除请求</span><br>    threading.Thread(target=delete_message, args=(messages[i],)).start()<br><br><span class="hljs-comment"># 等待最后一个消息被删除</span><br>time.sleep(<span class="hljs-built_in">max</span>(<span class="hljs-number">0</span>,<span class="hljs-number">3</span> - messages[-<span class="hljs-number">1</span>][<span class="hljs-number">1</span>]))<br><br><span class="hljs-comment"># 获取 flag</span><br>time.sleep(<span class="hljs-number">2</span>) <span class="hljs-comment">#等待所有线程运行完毕</span><br>response = session.post(<span class="hljs-string">&quot;http://202.38.93.111:10021/api/getflag&quot;</span>)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Flag:&quot;</span>, response.text&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置 session</span></span><br><span class="line">session = requests.Session()</span><br><span class="line">session.cookies.<span class="built_in">set</span>(<span class="string">&quot;session&quot;</span>, <span class="string">&quot;eyJ0b2tlbiI6IjM0MDpNRVFDSUQxNU5GUnJURzY4a0I2MUxTdEdVL2RWZEU3eGZrSllHbHpNdk8rVUVmUnlBaUJabjVybTVYSlo0UkJUNTRtN1FkdS9mTG9Lem5lMU1HZmlYRmFQYk5LdWhRPT0ifQ.ZT4eFw.eaokXgOWqIaaKVpIijCDrvuxRLo&quot;</span>, domain=<span class="string">&quot;202.38.93.111&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取消息</span></span><br><span class="line">response = session.post(<span class="string">&quot;http://202.38.93.111:10021/api/getMessages&quot;</span>)</span><br><span class="line">data = response.json()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提取所有 hack[...] 格式的消息及其 delay</span></span><br><span class="line">messages = []</span><br><span class="line"><span class="keyword">for</span> i, message <span class="keyword">in</span> <span class="built_in">enumerate</span>(data[<span class="string">&quot;messages&quot;</span>]):</span><br><span class="line">    text = message[<span class="string">&quot;text&quot;</span>]</span><br><span class="line">    delay = message[<span class="string">&quot;delay&quot;</span>]</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">match</span> := re.search(<span class="string">r&#x27;hack\[\w+\]&#x27;</span>, text)):</span><br><span class="line">        messages.append((i, delay, <span class="keyword">match</span>.group()))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 对消息按 delay 排序</span></span><br><span class="line">messages.sort(key=<span class="keyword">lambda</span> x: x[<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除消息的函数</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">delete_message</span>(<span class="params">message</span>):</span><br><span class="line">    response = session.post(<span class="string">&quot;http://202.38.93.111:10021/api/deleteMessage&quot;</span>, json=&#123;<span class="string">&quot;id&quot;</span>: message[<span class="number">0</span>]&#125;)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Deleted message:&quot;</span>, message[<span class="number">2</span>], <span class="string">&quot;| Response:&quot;</span>, response.text)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 发送删除请求</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(messages)):</span><br><span class="line">    <span class="keyword">if</span> i &gt; <span class="number">0</span>:</span><br><span class="line">        <span class="comment"># 等待 delay[i] - delay[i-1] 时间</span></span><br><span class="line">        time.sleep(<span class="built_in">max</span>(<span class="number">0</span>,messages[i][<span class="number">1</span>] - messages[i-<span class="number">1</span>][<span class="number">1</span>]))</span><br><span class="line">    <span class="comment"># 开启新线程来发送删除请求</span></span><br><span class="line">    threading.Thread(target=delete_message, args=(messages[i],)).start()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 等待最后一个消息被删除</span></span><br><span class="line">time.sleep(<span class="built_in">max</span>(<span class="number">0</span>,<span class="number">3</span> - messages[-<span class="number">1</span>][<span class="number">1</span>]))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取 flag</span></span><br><span class="line">time.sleep(<span class="number">2</span>) <span class="comment">#等待所有线程运行完毕</span></span><br><span class="line">response = session.post(<span class="string">&quot;http://202.38.93.111:10021/api/getflag&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Flag:&quot;</span>, response.text&#125;</span><br></pre></td></tr></table></figure>
 
 <p>跑完就能获取到 flag 了。</p>
 <p>这里需要探讨一下官方的做法。</p>
 <p>官方的做法是在浏览器里嵌入脚本：他这里的脚本就是每隔 100 毫秒查找出网页中包含 flag 的所有可点击的消息元素，然后点击它。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-built_in">setInterval</span>(<br>  <span class="hljs-function">() =&gt;</span><br>    <span class="hljs-title class_">Array</span>.<span class="hljs-title function_">from</span>(<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelectorAll</span>(<span class="hljs-string">&#x27;.fakeqq-message__bubble&#x27;</span>))<br>      .<span class="hljs-title function_">filter</span>(<span class="hljs-function">(<span class="hljs-params">element</span>) =&gt;</span> element.<span class="hljs-property">innerHTML</span>.<span class="hljs-title function_">indexOf</span>(<span class="hljs-string">&#x27;hack[&#x27;</span>) != -<span class="hljs-number">1</span>)<br>      .<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">element</span>) =&gt;</span> element.<span class="hljs-title function_">click</span>()),<br>  <span class="hljs-number">100</span><br>);<br></code></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">setInterval</span>(</span><br><span class="line">  <span class="function">() =&gt;</span></span><br><span class="line">    <span class="title class_">Array</span>.<span class="title function_">from</span>(<span class="variable language_">document</span>.<span class="title function_">querySelectorAll</span>(<span class="string">&#x27;.fakeqq-message__bubble&#x27;</span>))</span><br><span class="line">      .<span class="title function_">filter</span>(<span class="function">(<span class="params">element</span>) =&gt;</span> element.<span class="property">innerHTML</span>.<span class="title function_">indexOf</span>(<span class="string">&#x27;hack[&#x27;</span>) != -<span class="number">1</span>)</span><br><span class="line">      .<span class="title function_">forEach</span>(<span class="function">(<span class="params">element</span>) =&gt;</span> element.<span class="title function_">click</span>()),</span><br><span class="line">  <span class="number">100</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
 
 <p>“右键检查或按下 F12 键打开浏览器的开发者工具，选择「控制台」。将该脚本粘贴到控制台中，刷新页面（以重新开始题目）后按下回车执行脚本，就能自动撤回了。所有消息加载完毕后再稍等几秒，即可看到真正的 flag。”</p>
 <h3 id="虫"><a href="#虫" class="headerlink" title="虫"></a>虫</h3><p>满扫描电视，SSTV 图片传输，这里可以直接使用解码的脚本解码，跑出来直接就有 flag 了。</p>
@@ -361,43 +243,43 @@
 <p>对于 JSON 和 YAML1.2：</p>
 <p>YAML1.2 中明确规定了在遇到重复的键时必须报错，所以这里绕过比较简单，就是构造两个键名一样的参数即可。</p>
 <p>最后结果：</p>
-<p><img src="/2023/11/04/HackerGame2023/11.png" srcset="/img/loading.gif" lazyload alt="Alt text"></p>
+<p><img src="/2023/11/04/HackerGame2023/11.png" alt="Alt text"></p>
 <h3 id="Git-Git"><a href="#Git-Git" class="headerlink" title="Git? Git"></a>Git? Git</h3><p>题目：<br>「幸亏我发现了……」马老师长吁了一口气。</p>
 <p>「马老师，发生甚么事了？」马老师的一位英国研究生问。</p>
 <p>「刚刚一不小心，把 flag 提交到本地仓库里了。」马老师回答，「还好我发现了，撤销了这次提交，不然就惨了……」</p>
 <p>「这样啊，那太好了。」研究生说。</p>
 <p>马老师没想到的是，这位年轻人不讲武德，偷偷把他的本地仓库拷贝到了自己的电脑上，然后带出了实验室，想要一探究竟…</p>
 <p>我的方法简单粗暴，就是写一段脚本遍历所有 git 对象，然后打印出来，看看长不长，不长的话直接在里面找 flag，在本地文件夹 touch 建立一个文件，用 vim 打开，复制脚本：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br><br>objects_dir=<span class="hljs-string">&quot;.git/objects&quot;</span><br><span class="hljs-keyword">for</span> <span class="hljs-built_in">dir</span> <span class="hljs-keyword">in</span> $(<span class="hljs-built_in">ls</span> <span class="hljs-variable">$objects_dir</span>); <span class="hljs-keyword">do</span><br>  <span class="hljs-keyword">if</span> [ <span class="hljs-string">&quot;<span class="hljs-variable">$dir</span>&quot;</span> != <span class="hljs-string">&quot;info&quot;</span> ] &amp;&amp; [ <span class="hljs-string">&quot;<span class="hljs-variable">$dir</span>&quot;</span> != <span class="hljs-string">&quot;pack&quot;</span> ]; <span class="hljs-keyword">then</span><br>      <span class="hljs-keyword">for</span> file <span class="hljs-keyword">in</span> $(<span class="hljs-built_in">ls</span> <span class="hljs-variable">$objects_dir</span>/<span class="hljs-variable">$dir</span>); <span class="hljs-keyword">do</span><br>          object_hash=<span class="hljs-string">&quot;$dir<span class="hljs-variable">$file</span>&quot;</span><br>          object_content=$(git cat-file -p <span class="hljs-variable">$object_hash</span> 2&gt;/dev/null)<br>          <span class="hljs-keyword">if</span> [ ! -z <span class="hljs-string">&quot;<span class="hljs-variable">$object_content</span>&quot;</span> ]; <span class="hljs-keyword">then</span><br>              <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Object <span class="hljs-variable">$object_hash</span>:&quot;</span><br>              <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$object_content</span>&quot;</span><br>              <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;----------------------------------------&quot;</span><br>          <span class="hljs-keyword">fi</span><br>      <span class="hljs-keyword">done</span><br>  <span class="hljs-keyword">fi</span><br><span class="hljs-keyword">done</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line">objects_dir=<span class="string">&quot;.git/objects&quot;</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">dir</span> <span class="keyword">in</span> $(<span class="built_in">ls</span> <span class="variable">$objects_dir</span>); <span class="keyword">do</span></span><br><span class="line">  <span class="keyword">if</span> [ <span class="string">&quot;<span class="variable">$dir</span>&quot;</span> != <span class="string">&quot;info&quot;</span> ] &amp;&amp; [ <span class="string">&quot;<span class="variable">$dir</span>&quot;</span> != <span class="string">&quot;pack&quot;</span> ]; <span class="keyword">then</span></span><br><span class="line">      <span class="keyword">for</span> file <span class="keyword">in</span> $(<span class="built_in">ls</span> <span class="variable">$objects_dir</span>/<span class="variable">$dir</span>); <span class="keyword">do</span></span><br><span class="line">          object_hash=<span class="string">&quot;$dir<span class="variable">$file</span>&quot;</span></span><br><span class="line">          object_content=$(git cat-file -p <span class="variable">$object_hash</span> 2&gt;/dev/null)</span><br><span class="line">          <span class="keyword">if</span> [ ! -z <span class="string">&quot;<span class="variable">$object_content</span>&quot;</span> ]; <span class="keyword">then</span></span><br><span class="line">              <span class="built_in">echo</span> <span class="string">&quot;Object <span class="variable">$object_hash</span>:&quot;</span></span><br><span class="line">              <span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$object_content</span>&quot;</span></span><br><span class="line">              <span class="built_in">echo</span> <span class="string">&quot;----------------------------------------&quot;</span></span><br><span class="line">          <span class="keyword">fi</span></span><br><span class="line">      <span class="keyword">done</span></span><br><span class="line">  <span class="keyword">fi</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
 
 <p>打印出来之后找到 flag。</p>
 <p>官方题解是先通过 <code>git reflog</code> 查看完整操作历史，然后找到他最后一次的提交 hash，用 <code>git reset</code>回退到这次提交，查看 <code>README.md</code> 文件获得。</p>
 <h3 id="HTTP-集邮册"><a href="#HTTP-集邮册" class="headerlink" title="HTTP 集邮册"></a>HTTP 集邮册</h3><p>题目：<br>本题中，你可以向一个 nginx 服务器（对应的容器为默认配置下的 nginx:1.25.2-bookworm）发送 HTTP 请求。你需要获取到不同的 HTTP 响应状态码以获取 flag，其中：</p>
 <p>获取第一个 flag 需要收集 5 种状态码；<br>获取第二个 flag 需要让 nginx 返回首行无状态码的响应（不计入收集的状态码中）；<br>获取第三个 flag 需要收集 12 种状态码。<br>关于无状态码的判断逻辑如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python">crlf = buf.find(<span class="hljs-string">b&quot;\r\n&quot;</span>)<br><span class="hljs-keyword">if</span> buf.strip() != <span class="hljs-string">b&quot;&quot;</span>:<br>    <span class="hljs-keyword">try</span>:<br>        <span class="hljs-keyword">if</span> crlf == -<span class="hljs-number">1</span>:<br>            <span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">&quot;No CRLF found&quot;</span>)<br>        status_line = buf[:crlf]<br>        http_version, status_code, reason_phrase = status_line.split(<span class="hljs-string">b&quot; &quot;</span>, <span class="hljs-number">2</span>)<br>        status_code = <span class="hljs-built_in">int</span>(status_code)<br>    <span class="hljs-keyword">except</span> ValueError:<br>        buf += <span class="hljs-string">&quot;（无状态码）&quot;</span>.encode()<br>        status_code = <span class="hljs-literal">None</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">crlf = buf.find(<span class="string">b&quot;\r\n&quot;</span>)</span><br><span class="line"><span class="keyword">if</span> buf.strip() != <span class="string">b&quot;&quot;</span>:</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">if</span> crlf == -<span class="number">1</span>:</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">&quot;No CRLF found&quot;</span>)</span><br><span class="line">        status_line = buf[:crlf]</span><br><span class="line">        http_version, status_code, reason_phrase = status_line.split(<span class="string">b&quot; &quot;</span>, <span class="number">2</span>)</span><br><span class="line">        status_code = <span class="built_in">int</span>(status_code)</span><br><span class="line">    <span class="keyword">except</span> ValueError:</span><br><span class="line">        buf += <span class="string">&quot;（无状态码）&quot;</span>.encode()</span><br><span class="line">        status_code = <span class="literal">None</span></span><br></pre></td></tr></table></figure>
 
 <p>先来说说第二个 flag 的获得方式，根据上面这个代码，它查找第一个<code>\r\n</code>换行符时会尝试解析状态行，如何让他不返回状态码呢，这里我做的时候就是 fuzz 出来的，一个个试，其实不知道他的原理，看了官方文档才知道，构造 payload：</p>
 <p><code>GET /\r\n</code></p>
 <p>一般的 HTTP 头是通过两个空格去分割三个字符串,如果剩下两个空格就会回退到 HTTP&#x2F;0.9,上面这个 payload发送的就是 HTTP&#x2F;0.9 请求，这个请求只支持 GET，响应就直接响应文件内容，这样的请求没有状态码。即可获得 flag</p>
 <p>第一个 flag 和第三个 flag，我构造的 payload 和原理：</p>
-<figure class="highlight moonscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs moonscript">GET /<span class="hljs-number">50</span>x.html HTTP/<span class="hljs-number">1.1</span>\r\nHost: localhost\r\nIf-None-<span class="hljs-name">Match</span>: <span class="hljs-string">&quot;64dbafc8-1f1&quot;</span>\r\n\r\n<br>返回 <span class="hljs-number">304</span>，这里需要获取资源的 e-tag, <span class="hljs-number">304</span>代表文件在指定条件下没有修改过。<br><br>POST / HTTP/<span class="hljs-number">1.1</span>\r\nHost: localhost\r\nContent-<span class="hljs-name">Length</span>: <span class="hljs-number">10000000</span>\r\n\r\n<br>返回 <span class="hljs-number">413</span>，超出Content的范围<br><br>GET / HTTP/<span class="hljs-number">1.1</span>\r\nHost: localhost\r\nIf-<span class="hljs-name">Match</span>: <span class="hljs-string">&quot;12345&quot;</span>\r\n\r\n<br>返回 <span class="hljs-number">412</span>，发送一个带有失败前提条件的请求，这里用If-Match尝试去匹配etag，匹配失败就会返回<span class="hljs-number">412</span><br><br>POST / HTTP/<span class="hljs-number">1.1</span>\r\nHost: localhost\r\n\r\n<br>返回 <span class="hljs-number">411</span>，没有 Content-Length 头<br><br>PUT /index.html HTTP/<span class="hljs-number">1.1</span>\r\nHost: localhost\r\n\r\n<br>返回 <span class="hljs-number">405</span>，PUT方法被禁止<br><br>GET /a HTTP/<span class="hljs-number">1.1</span>\r\nHost: localhost\r\n\r\n<br>返回 <span class="hljs-number">404</span><br><br>GET / HTTP/<span class="hljs-number">1.1</span>\r\nHost: localhost\r\n\r\n<br>返回 <span class="hljs-number">400</span>，不符合HTTP格式要求<br><br>GET / HTTP/<span class="hljs-number">1.1</span>\r\nHost: localhost\r\<span class="hljs-name">nExpect</span>: <span class="hljs-number">100</span>-continue\r\n\r\n<br>返回 <span class="hljs-number">100</span>，nginx 只支持 <span class="hljs-number">100</span>-<span class="hljs-keyword">continue</span> 的 expect 回带，这里会返回 <span class="hljs-number">100</span>-<span class="hljs-keyword">continue</span>，<span class="hljs-number">100</span>-<span class="hljs-keyword">continue</span>代表服务器希望客户端继续请求或者忽略<br><br>GET / HTTP/<span class="hljs-number">1.1</span>\r\nHost: localhost\r\n\r\n<br>返回 <span class="hljs-number">200</span><br><br>GET / HTTP/<span class="hljs-number">5.5</span>\r\nHost: localhost\r\n\r\n<br>返回 <span class="hljs-number">505</span>，不支持该 http 方法<br><br>GET /aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa... HTTP/<span class="hljs-number">1.1</span>\r\nHost: localhost\r\n\r\n<br>返回 <span class="hljs-number">414</span>，请求头太长<br><br>GET / HTTP/<span class="hljs-number">1.1</span>\r\nHost: localhost\r\<span class="hljs-name">nRange</span>: bytes=<span class="hljs-number">1000</span><span class="hljs-number">-500</span>\r\n\r\n<br>返回 <span class="hljs-number">416</span>，资源范围不合法<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">GET /50x.html HTTP/1.1\r\nHost: localhost\r\nIf-None-Match: &quot;64dbafc8-1f1&quot;\r\n\r\n</span><br><span class="line">返回 304，这里需要获取资源的 e-tag, 304代表文件在指定条件下没有修改过。</span><br><span class="line"></span><br><span class="line">POST / HTTP/1.1\r\nHost: localhost\r\nContent-Length: 10000000\r\n\r\n</span><br><span class="line">返回 413，超出Content的范围</span><br><span class="line"></span><br><span class="line">GET / HTTP/1.1\r\nHost: localhost\r\nIf-Match: &quot;12345&quot;\r\n\r\n</span><br><span class="line">返回 412，发送一个带有失败前提条件的请求，这里用If-Match尝试去匹配etag，匹配失败就会返回412</span><br><span class="line"></span><br><span class="line">POST / HTTP/1.1\r\nHost: localhost\r\n\r\n</span><br><span class="line">返回 411，没有 Content-Length 头</span><br><span class="line"></span><br><span class="line">PUT /index.html HTTP/1.1\r\nHost: localhost\r\n\r\n</span><br><span class="line">返回 405，PUT方法被禁止</span><br><span class="line"></span><br><span class="line">GET /a HTTP/1.1\r\nHost: localhost\r\n\r\n</span><br><span class="line">返回 404</span><br><span class="line"></span><br><span class="line">GET / HTTP/1.1\r\nHost: localhost\r\n\r\n</span><br><span class="line">返回 400，不符合HTTP格式要求</span><br><span class="line"></span><br><span class="line">GET / HTTP/1.1\r\nHost: localhost\r\nExpect: 100-continue\r\n\r\n</span><br><span class="line">返回 100，nginx 只支持 100-continue 的 expect 回带，这里会返回 100-continue，100-continue代表服务器希望客户端继续请求或者忽略</span><br><span class="line"></span><br><span class="line">GET / HTTP/1.1\r\nHost: localhost\r\n\r\n</span><br><span class="line">返回 200</span><br><span class="line"></span><br><span class="line">GET / HTTP/5.5\r\nHost: localhost\r\n\r\n</span><br><span class="line">返回 505，不支持该 http 方法</span><br><span class="line"></span><br><span class="line">GET /aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa... HTTP/1.1\r\nHost: localhost\r\n\r\n</span><br><span class="line">返回 414，请求头太长</span><br><span class="line"></span><br><span class="line">GET / HTTP/1.1\r\nHost: localhost\r\nRange: bytes=1000-500\r\n\r\n</span><br><span class="line">返回 416，资源范围不合法</span><br></pre></td></tr></table></figure>
 
 <p>这里官方还提到了一种，他自己也漏了：</p>
-<figure class="highlight moonscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs moonscript">GET / HTTP/<span class="hljs-number">1.1</span>\r\n<br>Transfer-<span class="hljs-name">Encoding</span>: gzip\r\n<br><span class="hljs-name">Host</span>: example.com\r\n\r\n<br>返回<span class="hljs-number">501</span>，代表服务器不支持该功能，nginx里只支持chunked分块encoding，Transfer-Encoding这里换成chunked以外的都行<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">GET / HTTP/1.1\r\n</span><br><span class="line">Transfer-Encoding: gzip\r\n</span><br><span class="line">Host: example.com\r\n\r\n</span><br><span class="line">返回501，代表服务器不支持该功能，nginx里只支持chunked分块encoding，Transfer-Encoding这里换成chunked以外的都行</span><br></pre></td></tr></table></figure>
 
 <h3 id="Docker-for-Everyone"><a href="#Docker-for-Everyone" class="headerlink" title="Docker for Everyone"></a>Docker for Everyone</h3><p>很简单的 Docker 提权，先简单讲一下 docker，如果一个用户被加入到 docker 的用户组，那么他们可以运行 docker 的命令而无需 sudo，这会引入安全问题，如果用户可以使用 docker 命令，那么他们实际上就拥有了访问主机上任意文件的能力，他们可以挂载主机上的任何目录到他的启动容器中。这道题中就算 flag 是软连接，也可以创建一个新的 docker 容器将 flag 指向的真实路径挂在为容器内的卷，操作如下：</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs cmd"># 使用 docker 创建一个新容器并挂载 /flag<br># /flag 是我们想要读取的文件<br># /mnt 是容器内部的挂载点<br>docker run -v /flag:/mnt/flag -it alpine /bin/sh<br># 在容器内读取挂载的 /flag 文件<br>cat /mnt/flag<br></code></pre></td></tr></table></figure>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 使用 docker 创建一个新容器并挂载 /flag</span><br><span class="line"># /flag 是我们想要读取的文件</span><br><span class="line"># /mnt 是容器内部的挂载点</span><br><span class="line">docker run -v /flag:/mnt/flag -it alpine /bin/sh</span><br><span class="line"># 在容器内读取挂载的 /flag 文件</span><br><span class="line">cat /mnt/flag</span><br></pre></td></tr></table></figure>
 
 <p>结果：</p>
-<p><img src="/2023/11/04/HackerGame2023/12.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2023/11/04/HackerGame2023/12.png"></p>
 <h3 id="惜字如金-2-0"><a href="#惜字如金-2-0" class="headerlink" title="惜字如金 2.0"></a>惜字如金 2.0</h3><h4 id="惜字如金化标准"><a href="#惜字如金化标准" class="headerlink" title="惜字如金化标准"></a>惜字如金化标准</h4><p>惜字如金化指的是将一串文本中的部分字符删除，从而形成另一串文本的过程。该标准针对的是文本中所有由 52 个拉丁字母连续排布形成的序列，在下文中统称为「单词」。一个单词中除「AEIOUaeiou」外的 42 个字母被称作「辅音字母」。整个惜字如金化的过程按照以下两条原则对文本中的每个单词进行操作：</p>
 <p>第一原则（又称 creat 原则）：如单词最后一个字母为「e」或「E」，且该字母的上一个字母为辅音字母，则该字母予以删除。<br>第二原则（又称 referer 原则）：如单词中存在一串全部由完全相同（忽略大小写）的辅音字母组成的子串，则该子串仅保留第一个字母。<br>容易证明惜字如金化操作是幂等的：惜字如金化多次和惜字如金化一次的结果相同。</p>
-<h4 id="题目源码"><a href="#题目源码" class="headerlink" title="题目源码"></a>题目源码</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#!/usr/bin/python3</span><br><br><span class="hljs-comment"># Th siz of th fil may reduc after XZRJification</span><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">check_equals</span>(<span class="hljs-params">left, right</span>):<br>    <span class="hljs-comment"># check whether left == right or not</span><br>    <span class="hljs-keyword">if</span> left != right: exit(<span class="hljs-number">1</span>)<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_cod_dict</span>():<br>    <span class="hljs-comment"># prepar th cod dict</span><br>    cod_dict = []<br>    cod_dict += [<span class="hljs-string">&#x27;nymeh1niwemflcir&#125;echaet&#x27;</span>]<br>    cod_dict += [<span class="hljs-string">&#x27;a3g7&#125;kidgojernoetlsup?h&#x27;</span>]<br>    cod_dict += [<span class="hljs-string">&#x27;ulw!f5soadrhwnrsnstnoeq&#x27;</span>]<br>    cod_dict += [<span class="hljs-string">&#x27;ct&#123;l-findiehaai&#123;oveatas&#x27;</span>]<br>    cod_dict += [<span class="hljs-string">&#x27;ty9kxborszstguyd?!blm-p&#x27;</span>]<br>    check_equals(<span class="hljs-built_in">set</span>(<span class="hljs-built_in">len</span>(s) <span class="hljs-keyword">for</span> s <span class="hljs-keyword">in</span> cod_dict), &#123;<span class="hljs-number">24</span>&#125;)<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;&#x27;</span>.join(cod_dict)<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">decrypt_data</span>(<span class="hljs-params">input_codes</span>):<br>    <span class="hljs-comment"># retriev th decrypted data</span><br>    cod_dict = get_cod_dict()<br>    output_chars = [cod_dict[c] <span class="hljs-keyword">for</span> c <span class="hljs-keyword">in</span> input_codes]<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;&#x27;</span>.join(output_chars)<br><br><span class="hljs-keyword">if</span> __nam__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    <span class="hljs-comment"># check som obvious things</span><br>    check_equals(<span class="hljs-string">&#x27;creat&#x27;</span>, <span class="hljs-string">&#x27;cr&#x27;</span> + <span class="hljs-string">&#x27;at&#x27;</span>)<br>    check_equals(<span class="hljs-string">&#x27;referer&#x27;</span>, <span class="hljs-string">&#x27;refer&#x27;</span> + <span class="hljs-string">&#x27;rer&#x27;</span>)<br>    <span class="hljs-comment"># check th flag</span><br>    flag = decrypt_data([<span class="hljs-number">53</span>, <span class="hljs-number">41</span>, <span class="hljs-number">85</span>, <span class="hljs-number">109</span>, <span class="hljs-number">75</span>, <span class="hljs-number">1</span>, <span class="hljs-number">33</span>, <span class="hljs-number">48</span>, <span class="hljs-number">77</span>, <span class="hljs-number">90</span>,<br>                         <span class="hljs-number">17</span>, <span class="hljs-number">118</span>, <span class="hljs-number">36</span>, <span class="hljs-number">25</span>, <span class="hljs-number">13</span>, <span class="hljs-number">89</span>, <span class="hljs-number">90</span>, <span class="hljs-number">3</span>, <span class="hljs-number">63</span>, <span class="hljs-number">25</span>,<br>                         <span class="hljs-number">31</span>, <span class="hljs-number">77</span>, <span class="hljs-number">27</span>, <span class="hljs-number">60</span>, <span class="hljs-number">3</span>, <span class="hljs-number">118</span>, <span class="hljs-number">24</span>, <span class="hljs-number">62</span>, <span class="hljs-number">54</span>, <span class="hljs-number">61</span>,<br>                         <span class="hljs-number">25</span>, <span class="hljs-number">63</span>, <span class="hljs-number">77</span>, <span class="hljs-number">36</span>, <span class="hljs-number">5</span>, <span class="hljs-number">32</span>, <span class="hljs-number">60</span>, <span class="hljs-number">67</span>, <span class="hljs-number">113</span>, <span class="hljs-number">28</span>])<br>    check_equals(flag.index(<span class="hljs-string">&#x27;flag&#123;&#x27;</span>), <span class="hljs-number">0</span>)<br>    check_equals(flag.index(<span class="hljs-string">&#x27;&#125;&#x27;</span>), <span class="hljs-built_in">len</span>(flag) - <span class="hljs-number">1</span>)<br>    <span class="hljs-comment"># print th flag</span><br>    <span class="hljs-built_in">print</span>(flag)<br></code></pre></td></tr></table></figure>
+<h4 id="题目源码"><a href="#题目源码" class="headerlink" title="题目源码"></a>题目源码</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python3</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Th siz of th fil may reduc after XZRJification</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">check_equals</span>(<span class="params">left, right</span>):</span><br><span class="line">    <span class="comment"># check whether left == right or not</span></span><br><span class="line">    <span class="keyword">if</span> left != right: exit(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_cod_dict</span>():</span><br><span class="line">    <span class="comment"># prepar th cod dict</span></span><br><span class="line">    cod_dict = []</span><br><span class="line">    cod_dict += [<span class="string">&#x27;nymeh1niwemflcir&#125;echaet&#x27;</span>]</span><br><span class="line">    cod_dict += [<span class="string">&#x27;a3g7&#125;kidgojernoetlsup?h&#x27;</span>]</span><br><span class="line">    cod_dict += [<span class="string">&#x27;ulw!f5soadrhwnrsnstnoeq&#x27;</span>]</span><br><span class="line">    cod_dict += [<span class="string">&#x27;ct&#123;l-findiehaai&#123;oveatas&#x27;</span>]</span><br><span class="line">    cod_dict += [<span class="string">&#x27;ty9kxborszstguyd?!blm-p&#x27;</span>]</span><br><span class="line">    check_equals(<span class="built_in">set</span>(<span class="built_in">len</span>(s) <span class="keyword">for</span> s <span class="keyword">in</span> cod_dict), &#123;<span class="number">24</span>&#125;)</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;&#x27;</span>.join(cod_dict)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">decrypt_data</span>(<span class="params">input_codes</span>):</span><br><span class="line">    <span class="comment"># retriev th decrypted data</span></span><br><span class="line">    cod_dict = get_cod_dict()</span><br><span class="line">    output_chars = [cod_dict[c] <span class="keyword">for</span> c <span class="keyword">in</span> input_codes]</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;&#x27;</span>.join(output_chars)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __nam__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="comment"># check som obvious things</span></span><br><span class="line">    check_equals(<span class="string">&#x27;creat&#x27;</span>, <span class="string">&#x27;cr&#x27;</span> + <span class="string">&#x27;at&#x27;</span>)</span><br><span class="line">    check_equals(<span class="string">&#x27;referer&#x27;</span>, <span class="string">&#x27;refer&#x27;</span> + <span class="string">&#x27;rer&#x27;</span>)</span><br><span class="line">    <span class="comment"># check th flag</span></span><br><span class="line">    flag = decrypt_data([<span class="number">53</span>, <span class="number">41</span>, <span class="number">85</span>, <span class="number">109</span>, <span class="number">75</span>, <span class="number">1</span>, <span class="number">33</span>, <span class="number">48</span>, <span class="number">77</span>, <span class="number">90</span>,</span><br><span class="line">                         <span class="number">17</span>, <span class="number">118</span>, <span class="number">36</span>, <span class="number">25</span>, <span class="number">13</span>, <span class="number">89</span>, <span class="number">90</span>, <span class="number">3</span>, <span class="number">63</span>, <span class="number">25</span>,</span><br><span class="line">                         <span class="number">31</span>, <span class="number">77</span>, <span class="number">27</span>, <span class="number">60</span>, <span class="number">3</span>, <span class="number">118</span>, <span class="number">24</span>, <span class="number">62</span>, <span class="number">54</span>, <span class="number">61</span>,</span><br><span class="line">                         <span class="number">25</span>, <span class="number">63</span>, <span class="number">77</span>, <span class="number">36</span>, <span class="number">5</span>, <span class="number">32</span>, <span class="number">60</span>, <span class="number">67</span>, <span class="number">113</span>, <span class="number">28</span>])</span><br><span class="line">    check_equals(flag.index(<span class="string">&#x27;flag&#123;&#x27;</span>), <span class="number">0</span>)</span><br><span class="line">    check_equals(flag.index(<span class="string">&#x27;&#125;&#x27;</span>), <span class="built_in">len</span>(flag) - <span class="number">1</span>)</span><br><span class="line">    <span class="comment"># print th flag</span></span><br><span class="line">    <span class="built_in">print</span>(flag)</span><br></pre></td></tr></table></figure>
 
 <p>我的做法是做推理，他说到了前 5 个字符是 ‘flag{‘ ,最后一个字符是 ‘}’ ，我们找规律发现这边至少有 119 个字符，而这一对串里只有 115 个，说明惜字如金去掉了部分字符，根据这个惜字如金的标准，首先我们现在每一个串的末尾加上 e，跑一遍看看结果：</p>
 <p><code>5laulyoufeepr3cvees3df7weparsn3sfr1gwn!&#125;</code></p>
 <p>这里可以看到字符’la’和字符’}’已经被凑出来了，然后就是一个个试了，我的方法就是在末尾添 e 删 e（因为存在 referer 标准，要添几个 e 都是不确定的），我最后试出来的是：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python">cod_dict += [<span class="hljs-string">&#x27;nymeh1niwemflcir&#125;echaete&#x27;</span>]<br>cod_dict += [<span class="hljs-string">&#x27;a3g7&#125;kidgojernoetlsup?hee&#x27;</span>]<br>cod_dict += [<span class="hljs-string">&#x27;ulw!f5soadrhwnrsnstnoeqe&#x27;</span>]<br>cod_dict += [<span class="hljs-string">&#x27;ct&#123;l-findiehaai&#123;oveatase&#x27;</span>]<br>cod_dict += [<span class="hljs-string">&#x27;ty9kxborszstguyd?!blm-pe&#x27;</span>]<br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cod_dict += [<span class="string">&#x27;nymeh1niwemflcir&#125;echaete&#x27;</span>]</span><br><span class="line">cod_dict += [<span class="string">&#x27;a3g7&#125;kidgojernoetlsup?hee&#x27;</span>]</span><br><span class="line">cod_dict += [<span class="string">&#x27;ulw!f5soadrhwnrsnstnoeqe&#x27;</span>]</span><br><span class="line">cod_dict += [<span class="string">&#x27;ct&#123;l-findiehaai&#123;oveatase&#x27;</span>]</span><br><span class="line">cod_dict += [<span class="string">&#x27;ty9kxborszstguyd?!blm-pe&#x27;</span>]</span><br></pre></td></tr></table></figure>
 
 <p>结果为：<br><code>flag&#123;yoe-ve-r3cover3d-7he-an5w3r-r1ght?&#125;</code></p>
 <p>但传上去发现是错的，我发现这个’yoe’有问题，改成’you’上传就正确了。</p>
@@ -405,458 +287,100 @@
 <p>你在探索的过程中意外进入了一个封闭空间。这是一个由神秘的高频率星人控制着的星球。星球的中心竖立着一个巨大的三角形任务牌，上面刻着密文和挑战。</p>
 <p>高频率星人的视觉输入频率极高，可以一目千行、过目不忘，他们的交流对地球人来说过于超前了。flag 被藏在了这段代码中，但是现在只有高频率星人在终端浏览代码的时候，使用 asciinema 录制的文件了，你能从中还原出代码吗？</p>
 <p>大概就是还原 asciinema 录制文件，然后就跑还原出来的代码，<br>这里用命令：</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmd">asciinema cat asciinema_restore.rec &gt; output.txt<br></code></pre></td></tr></table></figure>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">asciinema cat asciinema_restore.rec &gt; output.txt</span><br></pre></td></tr></table></figure>
 
 <p>跑出来之后发现很多干扰，所以用 sed 过滤一下：</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmd">asciinema cat asciinema_restore.rec | sed &#x27;s/\x1b\[[<span class="hljs-number">0</span>-<span class="hljs-number">9</span>;]*[a-zA-Z]//g&#x27; | sed &#x27;s/\x1b.//g&#x27; | tr -d &#x27;\b&#x27; &gt; output.txt<br></code></pre></td></tr></table></figure>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">asciinema cat asciinema_restore.rec | sed &#x27;s/\x1b\[[<span class="number">0</span>-<span class="number">9</span>;]*[a-zA-Z]//g&#x27; | sed &#x27;s/\x1b.//g&#x27; | tr -d &#x27;\b&#x27; &gt; output.txt</span><br></pre></td></tr></table></figure>
 
 <p>跑出来后发现还是有部分没去掉的，就人工去了，大概就是 find 然后替换这样子，还原出代码后跑这个代码就能获得到 flag 了：</p>
-<p><img src="/2023/11/04/HackerGame2023/13.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2023/11/04/HackerGame2023/13.png"></p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>WP 就写到这里了，之后会好好研究每一道题，之后的题解会单独放出来，这里就把我写出来的题做一个总结。这次 HackerGame 很有意思，期待明年的！</p>
-
-                
-              </div>
-            
-            <hr/>
-            <div>
-              <div class="post-metas my-3">
-  
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/HackerGame/" class="category-chain-item">HackerGame</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/HackerGame/2023/" class="category-chain-item">2023</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-    </div>
-  
-  
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/%E7%A4%BE%E5%B7%A5/" class="print-no-link">#社工</a>
-      
-        <a href="/tags/%E7%88%86%E7%A0%B4/" class="print-no-link">#爆破</a>
-      
-        <a href="/tags/docker/" class="print-no-link">#docker</a>
-      
-        <a href="/tags/git/" class="print-no-link">#git</a>
-      
-        <a href="/tags/HTTP/" class="print-no-link">#HTTP</a>
-      
-        <a href="/tags/Web-%E7%BC%96%E7%A8%8B/" class="print-no-link">#Web 编程</a>
-      
-        <a href="/tags/asciinema/" class="print-no-link">#asciinema</a>
-      
-        <a href="/tags/json/" class="print-no-link">#json</a>
-      
-        <a href="/tags/yaml/" class="print-no-link">#yaml</a>
-      
-    </div>
-  
-</div>
-
-
-              
-  
-
-  <div class="license-box my-3">
-    <div class="license-title">
-      <div>【HackerGame2023】 WriteUp</div>
-      <div>https://214polaris.github.io/2023/11/04/HackerGame2023/</div>
-    </div>
-    <div class="license-meta">
-      
-        <div class="license-meta-item">
-          <div>作者</div>
-          <div>214</div>
-        </div>
-      
-      
-        <div class="license-meta-item license-meta-date">
-          <div>发布于</div>
-          <div>2023年11月4日</div>
-        </div>
-      
-      
-      
-        <div class="license-meta-item">
-          <div>许可协议</div>
-          <div>
-            
-              
-              
-                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
-                    <i class="iconfont icon-by"></i>
-                  </span>
-                </a>
-              
-            
-          </div>
-        </div>
-      
-    </div>
-    <div class="license-icon iconfont"></div>
-  </div>
-
-
-
-              
-                <div class="post-prevnext my-3">
-                  <article class="post-prev col-6">
-                    
-                    
-                      <a href="/2023/11/05/HackerGame2023-LLM/" title="【HackerGame2023】小型语言大模型星球 LLM Attack">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">【HackerGame2023】小型语言大模型星球 LLM Attack</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
-                  </article>
-                  <article class="post-next col-6">
-                    
-                    
-                      <a href="/2023/10/31/newstarctf2023-fast-destruct/" title="【newstarctf2023】Fast Destruct">
-                        <span class="hidden-mobile">【newstarctf2023】Fast Destruct</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
-                    
-                  </article>
-                </div>
-              
-            </div>
-
-            
-          </article>
-        </div>
-      </div>
-    </div>
-
-    <div class="side-col d-none d-lg-block col-lg-2">
-      
-  <aside class="sidebar" style="margin-left: -1rem">
-    <div id="toc">
-  <p class="toc-header">
-    <i class="iconfont icon-list"></i>
-    <span>目录</span>
-  </p>
-  <div class="toc-body" id="toc-body"></div>
-</div>
-
-
-
-  </aside>
-
-
-    </div>
-  </div>
-</div>
-
-
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-  
-  
-
-
-
-
-
-
-
-
-
-    
-
-    
-      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
-        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-      </a>
-    
-
-    
-      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
-        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body mx-3">
-        <div class="md-form mb-5">
-          <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
-        </div>
-        <div class="list-group" id="local-search-result"></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-    
-
-    
-  </main>
-
-  <footer>
-    <div class="footer-inner">
-  
-    <div class="footer-content">
-       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>214</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Neptunyyy</span></a> 
-    </div>
-  
-  
-  
-  
-</div>
-
-  </footer>
-
-  <!-- Scripts -->
-  
-  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
-
-  <script>
-    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
-    NProgress.start()
-    window.addEventListener('load', function() {
-      NProgress.done();
-    })
-  </script>
-
-
-<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
-<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="/js/events.js" ></script>
-<script  src="/js/plugins.js" ></script>
-
-
-  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
-  <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var subtitle = document.getElementById('subtitle');
-      if (!subtitle || !typing) {
-        return;
-      }
-      var text = subtitle.getAttribute('data-typed-text');
-      
-        typing(text);
-      
-    })(window, document);
-  </script>
-
-
-
-
-  
-    <script  src="/js/img-lazyload.js" ></script>
-  
-
-
-
-
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
-    var toc = jQuery('#toc');
-    if (toc.length === 0 || !window.tocbot) { return; }
-    var boardCtn = jQuery('#board-ctn');
-    var boardTop = boardCtn.offset().top;
-
-    window.tocbot.init(Object.assign({
-      tocSelector     : '#toc-body',
-      contentSelector : '.markdown-body',
-      linkClass       : 'tocbot-link',
-      activeLinkClass : 'tocbot-active-link',
-      listClass       : 'tocbot-list',
-      isCollapsedClass: 'tocbot-is-collapsed',
-      collapsibleClass: 'tocbot-is-collapsible',
-      scrollSmooth    : true,
-      includeTitleTags: true,
-      headingsOffset  : -boardTop,
-    }, CONFIG.toc));
-    if (toc.find('.toc-list-item').length > 0) {
-      toc.css('visibility', 'visible');
-    }
-
-    Fluid.events.registerRefreshCallback(function() {
-      if ('tocbot' in window) {
-        tocbot.refresh();
-        var toc = jQuery('#toc');
-        if (toc.length === 0 || !tocbot) {
-          return;
-        }
-        if (toc.find('.toc-list-item').length > 0) {
-          toc.css('visibility', 'visible');
-        }
-      }
-    });
-  });
-</script>
-
-
-  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
-
-  <script>Fluid.plugins.codeWidget();</script>
-
-
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
-    window.anchors.options = {
-      placement: CONFIG.anchorjs.placement,
-      visible  : CONFIG.anchorjs.visible
-    };
-    if (CONFIG.anchorjs.icon) {
-      window.anchors.options.icon = CONFIG.anchorjs.icon;
-    }
-    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
-    var res = [];
-    for (var item of el) {
-      res.push('.markdown-body > ' + item.trim());
-    }
-    if (CONFIG.anchorjs.placement === 'left') {
-      window.anchors.options.class = 'anchorjs-link-left';
-    }
-    window.anchors.add(res.join(', '));
-
-    Fluid.events.registerRefreshCallback(function() {
-      if ('anchors' in window) {
-        anchors.removeAll();
-        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
-        var res = [];
-        for (var item of el) {
-          res.push('.markdown-body > ' + item.trim());
-        }
-        if (CONFIG.anchorjs.placement === 'left') {
-          anchors.options.class = 'anchorjs-link-left';
-        }
-        anchors.add(res.join(', '));
-      }
-    });
-  });
-</script>
-
-
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
-    Fluid.plugins.fancyBox();
-  });
-</script>
-
-
-  <script>Fluid.plugins.imageCaption();</script>
-
-  
-      <script>
-        if (!window.MathJax) {
-          window.MathJax = {
-            tex    : {
-              inlineMath: { '[+]': [['$', '$']] }
-            },
-            loader : {
-              load: ['ui/lazy']
-            },
-            options: {
-              renderActions: {
-                insertedScript: [200, () => {
-                  document.querySelectorAll('mjx-container').forEach(node => {
-                    let target = node.parentNode;
-                    if (target.nodeName.toLowerCase() === 'li') {
-                      target.parentNode.classList.add('has-jax');
-                    }
-                  });
-                }, '', false]
-              }
-            }
-          };
-        } else {
-          MathJax.startup.document.state(0);
-          MathJax.texReset();
-          MathJax.typeset();
-          MathJax.typesetPromise();
-        }
-
-        Fluid.events.registerRefreshCallback(function() {
-          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
-            MathJax.startup.document.state(0);
-            MathJax.texReset();
-            MathJax.typeset();
-            MathJax.typesetPromise();
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://214polaris.github.io">214</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://214polaris.github.io/2023/11/04/HackerGame2023/">https://214polaris.github.io/2023/11/04/HackerGame2023/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://214polaris.github.io" target="_blank">214's blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%A4%BE%E5%B7%A5/">社工</a><a class="post-meta__tags" href="/tags/%E7%88%86%E7%A0%B4/">爆破</a><a class="post-meta__tags" href="/tags/docker/">docker</a><a class="post-meta__tags" href="/tags/git/">git</a><a class="post-meta__tags" href="/tags/HTTP/">HTTP</a><a class="post-meta__tags" href="/tags/Web-%E7%BC%96%E7%A8%8B/">Web 编程</a><a class="post-meta__tags" href="/tags/asciinema/">asciinema</a><a class="post-meta__tags" href="/tags/json/">json</a><a class="post-meta__tags" href="/tags/yaml/">yaml</a></div><div class="post_share"><div class="social-share" data-image="/img/comic_0031.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/11/05/HackerGame2023-LLM/" title="【HackerGame2023】小型语言大模型星球 LLM Attack"><img class="cover" src="/img/comic_0032.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">【HackerGame2023】小型语言大模型星球 LLM Attack</div></div></a></div><div class="next-post pull-right"><a href="/2023/10/31/newstarctf2023-fast-destruct/" title="【newstarctf2023】Fast Destruct"><img class="cover" src="/img/comic_0030.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">【newstarctf2023】Fast Destruct</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2023/09/18/easy-blast/" title="【攻防世界】weak_auth 密码爆破"><img class="cover" src="/img/comic_0022.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-09-18</div><div class="title">【攻防世界】weak_auth 密码爆破</div></div></a></div></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="disqus_thread"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">214</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">20</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">38</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">11</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/214Polaris"><i class="fab fa-github"></i><span>关注我</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/214Polaris" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:xxxxxx@gmail.com" target="_blank" title="QQ"><i class="fas fa-qq" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#HackerGame-2023-WriteUp"><span class="toc-number">1.</span> <span class="toc-text">HackerGame 2023 WriteUp</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%84%9F%E6%83%B3"><span class="toc-number">1.1.</span> <span class="toc-text">感想</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#WP-%E9%83%A8%E5%88%86"><span class="toc-number">1.2.</span> <span class="toc-text">WP 部分</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#HackerGame-%E5%90%AF%E5%8A%A8"><span class="toc-number">1.2.1.</span> <span class="toc-text">HackerGame 启动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%8C%AB%E5%92%AA%E5%B0%8F%E6%B5%8B"><span class="toc-number">1.2.2.</span> <span class="toc-text">猫咪小测</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9B%B4%E6%B7%B1%E6%9B%B4%E6%9A%97"><span class="toc-number">1.2.3.</span> <span class="toc-text">更深更暗</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%85%E8%A1%8C%E7%85%A7%E7%89%87-3-0"><span class="toc-number">1.2.4.</span> <span class="toc-text">旅行照片 3.0</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B5%9B%E5%8D%9A%E4%BA%95%E5%AD%97%E6%A3%8B"><span class="toc-number">1.2.5.</span> <span class="toc-text">赛博井字棋</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A5%B6%E5%A5%B6%E7%9A%84%E7%9D%A1%E5%89%8D-flag-%E6%95%85%E4%BA%8B"><span class="toc-number">1.2.6.</span> <span class="toc-text">奶奶的睡前 flag 故事</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%84%E5%A7%94%E4%BC%9A%E6%A8%A1%E6%8B%9F%E5%99%A8"><span class="toc-number">1.2.7.</span> <span class="toc-text">组委会模拟器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%99%AB"><span class="toc-number">1.2.8.</span> <span class="toc-text">虫</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JSON-%E2%8A%82-YAML"><span class="toc-number">1.2.9.</span> <span class="toc-text">JSON ⊂ YAML?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Git-Git"><span class="toc-number">1.2.10.</span> <span class="toc-text">Git? Git</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HTTP-%E9%9B%86%E9%82%AE%E5%86%8C"><span class="toc-number">1.2.11.</span> <span class="toc-text">HTTP 集邮册</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Docker-for-Everyone"><span class="toc-number">1.2.12.</span> <span class="toc-text">Docker for Everyone</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%83%9C%E5%AD%97%E5%A6%82%E9%87%91-2-0"><span class="toc-number">1.2.13.</span> <span class="toc-text">惜字如金 2.0</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%83%9C%E5%AD%97%E5%A6%82%E9%87%91%E5%8C%96%E6%A0%87%E5%87%86"><span class="toc-number">1.2.13.1.</span> <span class="toc-text">惜字如金化标准</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E6%BA%90%E7%A0%81"><span class="toc-number">1.2.13.2.</span> <span class="toc-text">题目源码</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AB%98%E9%A2%91%E7%8E%87%E6%98%9F%E7%90%83"><span class="toc-number">1.2.14.</span> <span class="toc-text">高频率星球</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">1.3.</span> <span class="toc-text">总结</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/11/09/NewStarCTF2023-Include-pearcmd-%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" title="【NewStarCTF2023】 Include🍐 pearcmd 文件包含"><img src="/img/comic_0038.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【NewStarCTF2023】 Include🍐 pearcmd 文件包含"/></a><div class="content"><a class="title" href="/2023/11/09/NewStarCTF2023-Include-pearcmd-%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" title="【NewStarCTF2023】 Include🍐 pearcmd 文件包含">【NewStarCTF2023】 Include🍐 pearcmd 文件包含</a><time datetime="2023-11-09T13:52:26.000Z" title="发表于 2023-11-09 21:52:26">2023-11-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/11/09/API%E6%BC%8F%E6%B4%9E-facebook-OAuth/" title="【API安全漏洞剖析】 FaceBook OAuth 漏洞 - 2020-03-01"><img src="/img/comic_0036.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【API安全漏洞剖析】 FaceBook OAuth 漏洞 - 2020-03-01"/></a><div class="content"><a class="title" href="/2023/11/09/API%E6%BC%8F%E6%B4%9E-facebook-OAuth/" title="【API安全漏洞剖析】 FaceBook OAuth 漏洞 - 2020-03-01">【API安全漏洞剖析】 FaceBook OAuth 漏洞 - 2020-03-01</a><time datetime="2023-11-09T06:07:09.000Z" title="发表于 2023-11-09 14:07:09">2023-11-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/11/08/NewStarCTF2023-Unserialize-Again/" title="【NewStarCTF2023】Unserialize Again phar 文件反序列化"><img src="/img/comic_0035.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【NewStarCTF2023】Unserialize Again phar 文件反序列化"/></a><div class="content"><a class="title" href="/2023/11/08/NewStarCTF2023-Unserialize-Again/" title="【NewStarCTF2023】Unserialize Again phar 文件反序列化">【NewStarCTF2023】Unserialize Again phar 文件反序列化</a><time datetime="2023-11-08T03:09:34.000Z" title="发表于 2023-11-08 11:09:34">2023-11-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/11/07/NewStarCTF-Inject-Me/" title="【NewStarCTF2023】Inject Me 目录穿越+ssti+flask_jwt"><img src="/img/comic_0034.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【NewStarCTF2023】Inject Me 目录穿越+ssti+flask_jwt"/></a><div class="content"><a class="title" href="/2023/11/07/NewStarCTF-Inject-Me/" title="【NewStarCTF2023】Inject Me 目录穿越+ssti+flask_jwt">【NewStarCTF2023】Inject Me 目录穿越+ssti+flask_jwt</a><time datetime="2023-11-07T07:18:19.000Z" title="发表于 2023-11-07 15:18:19">2023-11-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/11/06/NewStarCTF-Otenki-Girl/" title="【NewStarCTF2023】OtenkiGirl nodejs 原型链污染"><img src="/img/comic_0033.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【NewStarCTF2023】OtenkiGirl nodejs 原型链污染"/></a><div class="content"><a class="title" href="/2023/11/06/NewStarCTF-Otenki-Girl/" title="【NewStarCTF2023】OtenkiGirl nodejs 原型链污染">【NewStarCTF2023】OtenkiGirl nodejs 原型链污染</a><time datetime="2023-11-06T04:31:50.000Z" title="发表于 2023-11-06 12:31:50">2023-11-06</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By 214</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="chat-btn" type="button" title="聊天"><i class="fas fa-sms"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
           }
-        });
-      </script>
-    
-
-  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
-
-  <script  src="/js/local-search.js" ></script>
-
-
-
-
+        }, '']
+      }
+    }
+  }
   
-<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/DynamicRibbon.min.js"></script>
-<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/love.min.js"></script>
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script><script>(() => {
+  const disqus_config = function () {
+    this.page.url = 'https://214polaris.github.io/2023/11/04/HackerGame2023/'
+    this.page.identifier = '/2023/11/04/HackerGame2023/'
+    this.page.title = '【HackerGame2023】 WriteUp'
+  }
 
+  const disqusReset = () => {
+    window.DISQUS && window.DISQUS.reset({
+      reload: true,
+      config: disqus_config
+    })
+  }
 
+  btf.addGlobalFn('themeChange', disqusReset, 'disqus')
 
-<!-- 主题的启动项，将它保持在最底部 -->
-<!-- the boot of the theme, keep it at the bottom -->
-<script  src="/js/boot.js" ></script>
+  const loadDisqus = () =>{
+    if (window.DISQUS) disqusReset()
+    else {
+      const script = document.createElement('script')
+      script.src = 'https://214.disqus.com/embed.js'
+      script.setAttribute('data-timestamp', +new Date())
+      document.head.appendChild(script)
+    }
+  }
 
+  const getCount = async() => {
+    try {
+      const eleGroup = document.querySelector('#post-meta .disqus-comment-count')
+      if (!eleGroup) return
+      const cleanedLinks = eleGroup.href.replace(/#post-comment$/, '')
 
-  
+      const res = await fetch(`https://disqus.com/api/3.0/threads/set.json?forum=214&api_key=&thread:link=${cleanedLinks}`,{
+        method: 'GET'
+      })
+      const result = await res.json()
 
-  <noscript>
-    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
-  </noscript>
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/miku.model.json"},"display":{"position":"left","width":200,"height":350},"mobile":{"show":true},"react":{"opacity":1},"log":false});</script></body>
-</html>
+      const count = result.response.length ? result.response[0].posts : 0
+      eleGroup.textContent = count
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
+  if ('Disqus' === 'Disqus' || !false) {
+    if (false) btf.loadComment(document.getElementById('disqus_thread'), loadDisqus)
+    else {
+      loadDisqus()
+      
+    }
+  } else {
+    window.loadOtherComment = loadDisqus
+  }
+})()</script></div><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/miku.model.json"},"display":{"position":"left","width":200,"height":350},"mobile":{"show":true},"react":{"opacity":1},"log":false});</script></body></html>
