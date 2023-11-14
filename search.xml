@@ -1054,9 +1054,9 @@ The little girl was so happy that she had been able ...
       </tags>
   </entry>
   <entry>
-    <title>PayPal IDOR 漏洞</title>
+    <title>【API安全漏洞学习】Paypal IDOR 漏洞 - 2019-7-30</title>
     <url>/2023/11/14/PayPal-IDOR-%E6%BC%8F%E6%B4%9E/</url>
-    <content><![CDATA[<h1 id="【API安全漏洞学习】-Paypal-IDOR-漏洞-2019-7-30"><a href="#【API安全漏洞学习】-Paypal-IDOR-漏洞-2019-7-30" class="headerlink" title="【API安全漏洞学习】  Paypal IDOR 漏洞 - 2019-7-30"></a>【API安全漏洞学习】  Paypal IDOR 漏洞 - 2019-7-30</h1><h2 id="漏洞描述"><a href="#漏洞描述" class="headerlink" title="漏洞描述"></a>漏洞描述</h2><p>Paypal 平台中存在企业账号与对应的子账号, 企业账号通过委托授权子账号来管理账号上的资金, 对于不同的子账号拥有<strong>不同的权限和功能</strong>.<br>用一张图来理解就是:</p>
+    <content><![CDATA[<h1 id="【API安全漏洞学习】Paypal-IDOR-漏洞-2019-7-30"><a href="#【API安全漏洞学习】Paypal-IDOR-漏洞-2019-7-30" class="headerlink" title="【API安全漏洞学习】Paypal IDOR 漏洞 - 2019-7-30"></a>【API安全漏洞学习】Paypal IDOR 漏洞 - 2019-7-30</h1><h2 id="漏洞描述"><a href="#漏洞描述" class="headerlink" title="漏洞描述"></a>漏洞描述</h2><p>Paypal 平台中存在企业账号与对应的子账号, 企业账号通过委托授权子账号来管理账号上的资金, 对于不同的子账号拥有<strong>不同的权限和功能</strong>.<br>用一张图来理解就是:</p>
 <p><img src="/2023/11/14/PayPal-IDOR-%E6%BC%8F%E6%B4%9E/image.png"></p>
 <p>攻击者发现在这个 Paypal 的这个功能中存在 IDOR<br> 漏洞, 能够通过实现子账号间越权访问.</p>
 <h2 id="漏洞成因"><a href="#漏洞成因" class="headerlink" title="漏洞成因"></a>漏洞成因</h2><p>IDOR (Insecure Direct Object Reference), 又对象级授权问题, 它涉及到对Web应用程序或API中对象的不安全引用。这些对象通常是数据库记录、文件、目录等。当应用程序提供对这些对象的直接访问，并且没有适当地实施访问控制时，就会产生IDOR漏洞。</p>
