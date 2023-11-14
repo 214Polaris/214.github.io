@@ -1053,4 +1053,41 @@ The little girl was so happy that she had been able ...
         <tag>密码学</tag>
       </tags>
   </entry>
+  <entry>
+    <title>PayPal IDOR 漏洞</title>
+    <url>/2023/11/14/PayPal-IDOR-%E6%BC%8F%E6%B4%9E/</url>
+    <content><![CDATA[<h1 id="【API安全漏洞学习】-Paypal-IDOR-漏洞-2019-7-30"><a href="#【API安全漏洞学习】-Paypal-IDOR-漏洞-2019-7-30" class="headerlink" title="【API安全漏洞学习】  Paypal IDOR 漏洞 - 2019-7-30"></a>【API安全漏洞学习】  Paypal IDOR 漏洞 - 2019-7-30</h1><h2 id="漏洞描述"><a href="#漏洞描述" class="headerlink" title="漏洞描述"></a>漏洞描述</h2><p>Paypal 平台中存在企业账号与对应的子账号, 企业账号通过委托授权子账号来管理账号上的资金, 对于不同的子账号拥有<strong>不同的权限和功能</strong>.<br>用一张图来理解就是:</p>
+<p><img src="/2023/11/14/PayPal-IDOR-%E6%BC%8F%E6%B4%9E/image.png"></p>
+<p>攻击者发现在这个 Paypal 的这个功能中存在 IDOR<br> 漏洞, 能够通过实现子账号间越权访问.</p>
+<h2 id="漏洞成因"><a href="#漏洞成因" class="headerlink" title="漏洞成因"></a>漏洞成因</h2><p>IDOR (Insecure Direct Object Reference), 又对象级授权问题, 它涉及到对Web应用程序或API中对象的不安全引用。这些对象通常是数据库记录、文件、目录等。当应用程序提供对这些对象的直接访问，并且没有适当地实施访问控制时，就会产生IDOR漏洞。</p>
+<p>常见的 IDOR 漏洞有:</p>
+<ol>
+<li>用户数据泄露: 通过修改 URL 中的 ID 获取其他用户的隐私信息, 更严重的包括更改, 删除他人的信息.</li>
+<li>文件访问和泄露: 对于本没有权限访问的文件, 通过修改 URL 中文件的编号来越权访问.</li>
+</ol>
+<p>在本次漏洞中, 攻击这发现“查看子账号”功能中有一个 URL 为 <code>https://www.paypal.com/businessmanage/users/1657893467745278998</code><br>其中 <code>user</code> 后面的 <code>1657893467745278998</code> 是子账号所绑定的企业账号 ID, 紧接着产生一个 HTTP PUT 请求, 如下:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">PUT /businessmanage/users/api/v1/users? HTTP/1.1</span><br><span class="line">Host: www.paypal.com</span><br><span class="line">Connection: close</span><br><span class="line"></span><br><span class="line">[&#123;&quot;id&quot;:&quot;1657893467745278998&quot;,&quot;accessPoint&quot;:&#123;&quot;privileges&quot;:[&quot;MANUAL_REFERENCE_TXN&quot;,&quot;VIEW_CUSTOMERS&quot;,&quot;SEND_MONEY&quot;],&quot;id&quot;:&quot;5994224506&quot;,&quot;accounts&quot;:[&quot;attacker@gmail.com&quot;]&#125;,&quot;roleID&quot;:0,&quot;roleName&quot;:&quot;CUSTOM&quot;,&quot;privilegeChanged&quot;:true,&quot;privilegeSecondaryName&quot;:&quot;A1&quot;&#125;]</span><br></pre></td></tr></table></figure>
+
+<p>对于这个 API, 他通过之前上面的 API 发现第一个 <code>id</code> 参数值是企业账号的 id, 他很快就能确定第二个 <code>id</code> 是子账号的 id 了, 在这里第二个 <code>id</code> 的内容是简单的数值类型, 而且这个 <code>id</code> 是简单的递增或递减的, 是完全可以通过<strong>枚举</strong>的方式来获取到其他账号的 id 的,  将 <code>5994224506</code> 修改成 <code>5994224507</code> 就可以获取到同一企业账号其他子账号的权限了.</p>
+<h2 id="漏洞实施"><a href="#漏洞实施" class="headerlink" title="漏洞实施"></a>漏洞实施</h2><p>攻击者根据上述漏洞, 不仅可以查看到关联的另一个子账号的信息, 还可以把响应的子账号密码进行修改就可以实现账号接管并且进行任意未授权的转账操作.</p>
+<h2 id="漏洞启示"><a href="#漏洞启示" class="headerlink" title="漏洞启示"></a>漏洞启示</h2><p>Paypal 这个漏洞的产生有两个主要原因:</p>
+<ol>
+<li>子账号的 id 值可以通过枚举进行猜测</li>
+<li>一但获取到 id 权限可以被扩大, 后续的转账操作没有二次对密码等进行确认</li>
+</ol>
+<p>预防这种漏洞, 在开发过程中需要留意:</p>
+<ol>
+<li>增强 id 值的随机性</li>
+<li>在权限访问控制上, 要多次检验企业账号与子账号的绑定关系, 如每次访问涉及子账号权限的操作时, 要求其输入密码,或者输入绑定号等.</li>
+</ol>
+]]></content>
+      <categories>
+        <category>API 安全</category>
+        <category>漏洞剖析</category>
+      </categories>
+      <tags>
+        <tag>API 安全</tag>
+        <tag>IDOR</tag>
+      </tags>
+  </entry>
 </search>
