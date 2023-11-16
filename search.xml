@@ -27,8 +27,8 @@
 python test_integrate.py    #运行
 </code></pre>
 <h2 id="mitmproxy"><a href="#mitmproxy" class="headerlink" title="mitmproxy"></a>mitmproxy</h2><p>在script.py文件夹打开终端，直接运行：</p>
-<pre><code>mitmdump -s script_json.py
-</code></pre>
+<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">mitmdump -s script_json.py</span><br></pre></td></tr></table></figure>
+
 <p>如果没抓到包可能有以下情况：</p>
 <ol>
 <li>不在一个网段</li>
@@ -36,14 +36,14 @@ python test_integrate.py    #运行
 <li>代理的ip地址或端口号不对</li>
 </ol>
 <h2 id="对比脚本部分"><a href="#对比脚本部分" class="headerlink" title="对比脚本部分"></a>对比脚本部分</h2><p>为了方便，统一将对比的两个文件命名为 a.json 和 b.json，然后直接在compare.py所在文件夹打开终端，执行：</p>
-<pre><code>python compare.py
-</code></pre>
-<p>即可，会在当前目录下生成三个文件：</p>
+<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">python compare.py</span><br></pre></td></tr></table></figure>
+
+<p>即可，会在当前目录下生成两个文件：</p>
 <ol>
-<li>cleaned_a.json 代表a用户筛选出的键值发生变化的API，里面包括域名+完整path+键名+键值</li>
-<li>cleaned_b.json 同上，代表b用户</li>
-<li>keywords.json，关键词的整合，包括域名+部分path+键名</li>
+<li>cleaned_a.json: 仅保留了和 b 文件 domain+path 相同, 但是 params 不同的 api</li>
+<li>cleaned_b.json 同上</li>
 </ol>
+<p>在运行完脚本后, 请自行在文本对比器里找出哪些 params 不同。</p>
 ]]></content>
       <categories>
         <category>科研</category>
