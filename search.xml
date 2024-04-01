@@ -2000,4 +2000,28 @@ The little girl was so happy that she had been able ...
         <category>其他</category>
       </categories>
   </entry>
+  <entry>
+    <title>【AWD】主机发现与端口扫描</title>
+    <url>/2024/04/01/%E4%B8%BB%E6%9C%BA%E5%8F%91%E7%8E%B0%E4%B8%8E%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/</url>
+    <content><![CDATA[<h1 id="【AWD】主机发现与端口扫描"><a href="#【AWD】主机发现与端口扫描" class="headerlink" title="【AWD】主机发现与端口扫描"></a>【AWD】主机发现与端口扫描</h1><h2 id="nmap端口扫描"><a href="#nmap端口扫描" class="headerlink" title="nmap端口扫描"></a>nmap端口扫描</h2><p>比赛时建议扫两次，如果结果相同，则可信。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 扫描 ip 地址(mask为24全扫描)</span></span><br><span class="line">sudo nmap -sn 172.16.200.0/24</span><br><span class="line"><span class="comment"># 端口扫描(指定速率，-p-表示全端口，默认 TCP)</span></span><br><span class="line">sudo nmap --min-rate 10000 -p- 172.16.200.131</span><br><span class="line"><span class="comment"># 强制扫描 UDP</span></span><br><span class="line">sudo nmap -sU --min-rate 10000 -p- 172.16.200.131</span><br><span class="line"><span class="comment"># 服务与环境扫描(-sV打印服务版本，-O打印操作系统信息)</span></span><br><span class="line">sudo nmap -sT -sV -O p-80,111,777,52497,40444 172.16.200.131</span><br><span class="line"><span class="comment"># 使用内置脚本扫描漏洞</span></span><br><span class="line">sudo namp --script=vuln p-80,111,777,52497,40444 172.16.200.131</span><br></pre></td></tr></table></figure>
+
+<h2 id="主机发现"><a href="#主机发现" class="headerlink" title="主机发现"></a>主机发现</h2><p>不能用 kali 和 nmap 的情况下，写BASH脚本，利用 ping 命令发现主机。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># -c表示数量，-W表示超时时间，指定开放的主机ip范围</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> &#123;129..132&#125;;<span class="keyword">do</span> ping -c 1 -W 1 172.16.200.<span class="variable">$i</span>;<span class="keyword">done</span></span><br><span class="line"><span class="comment"># 只打印有效的ip地址</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> &#123;1..254&#125;;<span class="keyword">do</span> ping -c 1 -W 1 172.16.200.<span class="variable">$i</span>｜grep from;<span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="netstate-端口扫描"><a href="#netstate-端口扫描" class="headerlink" title="netstate 端口扫描"></a>netstate 端口扫描</h2><p>nc 要使用旧版的才能端口扫描。对于没开放的端口，会有 refused 字段，利用这个过滤，<code>2&gt;&amp;1</code>表示把错误信息导向到普通信息，才能正常过滤。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># -vv尽可能详细显示信息，-z指定0数据传输</span></span><br><span class="line">nc.traditional -vv -z 172.16.200.131 1-65535 2&gt;&amp;1 ｜ grep -v refused</span><br></pre></td></tr></table></figure>
+
+<h2 id="伪设备端口扫描"><a href="#伪设备端口扫描" class="headerlink" title="伪设备端口扫描"></a>伪设备端口扫描</h2><p>伪设备的意思是 linux 系统中所有设备被映射成一个文件，所以我们可用文件去模拟设备。</p>
+<p><code>&amp;&gt;dev/null</code> 把所有信息都丢掉， <code>&amp;&amp;</code> 表示前面成功执行了(没有报错)，才会执行后面的。就是前面找到了端口，我才会执行后面的语句。<code>|| printf &quot;.&quot;</code> 方便你判断程序是否在运行。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 括号部分是伪设备</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> &#123;1..65535&#125;;<span class="keyword">do</span> (<span class="built_in">echo</span> &lt; /dev/tcp/172.16.200.131/<span class="variable">$i</span>) &amp;&gt;dev/null &amp;&amp; <span class="built_in">printf</span> <span class="string">&quot;\n[+] The Open Port is: %d\n&quot;</span> <span class="string">&quot;<span class="variable">$i</span>&quot;</span> || <span class="built_in">printf</span> <span class="string">&quot;.&quot;</span>; <span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>AWD</category>
+        <category>红队</category>
+      </categories>
+      <tags>
+        <tag>端口扫描</tag>
+      </tags>
+  </entry>
 </search>
