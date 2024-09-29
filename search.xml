@@ -2014,4 +2014,46 @@ The little girl was so happy that she had been able ...
         <tag>端口扫描</tag>
       </tags>
   </entry>
+  <entry>
+    <title>ProtoBuff 介绍</title>
+    <url>/2024/09/29/ProtoBuff-%E4%BB%8B%E7%BB%8D/</url>
+    <content><![CDATA[<h1 id="【Protobuf】Pb-Generation"><a href="#【Protobuf】Pb-Generation" class="headerlink" title="【Protobuf】Pb Generation"></a>【Protobuf】Pb Generation</h1><h2 id="Connection1-0-XMPP协议"><a href="#Connection1-0-XMPP协议" class="headerlink" title="Connection1.0 - XMPP协议"></a>Connection1.0 - XMPP协议</h2><h3 id="XMPP"><a href="#XMPP" class="headerlink" title="XMPP"></a>XMPP</h3><p>XMPP(Extensible Messaging and Presence Protocol)，是一种通信协议，用于即时消息传递和传递在线状态信息。</p>
+<p>XMPP 有<strong>很好的安全性、可读性高</strong>、并且是物联网的标准协议，有更好的<strong>开放性</strong>和<strong>可拓展性</strong>。</p>
+<h3 id="XMPP-缺点"><a href="#XMPP-缺点" class="headerlink" title="XMPP 缺点"></a>XMPP 缺点</h3><ol>
+<li>基于 TLS 握手和 SASL challenge，前后台握手交互次数太多（超过 8 次），握手时间太长。</li>
+<li>包体是 xml 文本，虽然可读性高，但是包体比较大，信息载荷比低，带宽占用高。</li>
+</ol>
+<h2 id="Connection2-0-PB"><a href="#Connection2-0-PB" class="headerlink" title="Connection2.0 - PB"></a>Connection2.0 - PB</h2><h3 id="PB"><a href="#PB" class="headerlink" title="PB"></a>PB</h3><p>Pb(Protocol Buffers)，是谷歌开发的数据描述语言，有更高的拓展性。</p>
+<p>优点：</p>
+<ol>
+<li><p>高效性: Protobuf 是二进制格式，因此它生成的数据通常比 XMPP 小很多，这使得 Protobuf 在网络传输中更加高效。同时，Protobuf 的解析和序列化速度也比 XMPP 快</p>
+</li>
+<li><p>体积小且数据结构清晰，pb 的消息是二进制协议，无法直接阅读，使用 pb 协议需要预先定义数据结构（.proto 文件）:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//input</span><br><span class="line">syntax=&quot;proto3&quot;; //指明版本，默认 proto2</span><br><span class="line">message Person&#123;</span><br><span class="line"> string name = 1;</span><br><span class="line"> int32 age = 2;</span><br><span class="line"> string email = 3;</span><br><span class="line">&#125;</span><br><span class="line">//output</span><br><span class="line">syntax=&quot;proto3&quot;;</span><br><span class="line">message Person&#123;</span><br><span class="line"> string+1;</span><br><span class="line"> int32+2;</span><br><span class="line"> string email+3;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>具体转换为二进制的规则可以参考：<a href="https://developer.aliyun.com/article/1309545">https://developer.aliyun.com/article/1309545</a></p>
+<ol start="3">
+<li><p>安全: 提现在数据结构上。</p>
+</li>
+<li><p>向后兼容性，下面消息中，发给 2 中的旧协议，前面三个还是能拿到：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">syntax=&quot;proto3&quot;;</span><br><span class="line">message Person&#123;</span><br><span class="line"> string name = 1;</span><br><span class="line"> int32 age = 2;</span><br><span class="line"> string email = 3;</span><br><span class="line"> int32 number = 4;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>易于维护且强类型。</p>
+</li>
+</ol>
+<h3 id="高效编码方法"><a href="#高效编码方法" class="headerlink" title="高效编码方法"></a>高效编码方法</h3><ol>
+<li>Varint 编码：对于小整数，用较少字节，大整数才使用更多字节。</li>
+<li>长度限制（Length-delimited）编码：对于字符串&#x2F;字节数组&#x2F;嵌套数据结构，会在数据前附加数据长度的 Varint 编码</li>
+<li>Packed 编码：repeated 基本类型（类似 vector 可以重复任意次的动态数组），将所有元素连续存储在一个单独的字节数组，减少元数据开销。</li>
+<li>编号代替字段名：在 pb 里只会存 <code>类型+value</code>，压缩了key 名带来的空间，因此他对数据字段的顺序有严格要求（不能变换各个数据字段的顺序，否则无法向后兼容）。</li>
+<li>二进制格式： 没有需要额外存储的分隔符等，纯二进制格式的消息。</li>
+</ol>
+]]></content>
+      <categories>
+        <category>后台开发</category>
+      </categories>
+      <tags>
+        <tag>通信协议</tag>
+      </tags>
+  </entry>
 </search>
